@@ -1,0 +1,30 @@
+index:
+  path: /index
+  controller: App\Controller\IndexController::Default
+catt:
+  path: /All/Categories
+  controller: App\Controller\IndexController::Array
+array:
+  path: /index/categories
+  controller: App\Controller\IndexController::Array
+InformatiqueProd:
+  path: /index/categories/1
+  controller: App\Controller\IndexController::Informatique
+OrdinateurProd:
+  path: /index/categories/2
+  controller: App\Controller\IndexController::Ordinateur
+MultipmediaProd:
+  path: /index/categories/3
+  controller: App\Controller\IndexController::Multimedia
+TelephoneProd:
+  path: /index/categories/4
+  controller: App\Controller\IndexController::Telephone
+ProdSearch:
+  path: /index/product/{idProduct}
+  controller: App\Controller\IndexController::FindProduct
+useradd:
+  path: /userAdd
+  controller: App\Controller\IndexController::addUser
+userConnect:
+  path: /user
+  controller: App\Controller\IndexController::checkUser

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main_styles.css">
+
+    <title>Titldffe</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="header row">
+            <nav class="navbar navbar-expand-md navbar-light bg-light main-menu fixed-top" style="box-shadow:none">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <h4 class="font-weight-bold">E-com Paradise</h4>
+                    </a>
+                    <div class="collapse navbar-collapse">
+                        <form class="form-inline my-2 my-lg-0 mx-auto">
+   <!------ Include the above in your HEAD tag ---------->
+
+                            <input class="form-control" type="search" placeholder="Search for products..." aria-label="Search">
+                            <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+
+                        <ul class="navbar-nav">
+                            <li class="nav-item alighn-center">
+                              <button class="btn btn-link pt-4" data-toggle="modal" data-target="#exampleModalLong"><i class="fa fa-shopping-cart cart"></i> <span class="badge badge-danger" id="nb-prod">3</span></button>                            </li>
+                            <li class="nav-item ">
+                                <button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt"><i class="fa fa-user mr-1"></i>Log In / Register</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="row" style="margin-top: 55px">
+            
+                <div class="col-2 px-1 bg-light position-fixed"  style="height:600px;margin-top:30px">
+                    <ul class="nav flex-column nav-stacked" id="sticky-sidebar">
+                        
+                    </ul>
+                </div>
+                <div class="col-8 offset-2" >
+                    <div class="container">
+                        <h3 class="h3">Sélection du jour </h3>
+                        <div class="row" id="product-view">
+                            
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            
+        </div>
+        <!--Modal: Login / Register Form-->
+<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i>
+              Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i>
+              Register</a>
+          </li>
+        </ul>
+
+        <!-- Tab panels -->
+        <div class="tab-content">
+          <!--Panel 7-->
+          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+            <!--Body-->
+            <div class="modal-body mb-1">
+              <form action="#" method="post" id="frmLogin" >
+
+                <div class="md-form form-sm mb-5">
+                  <i class="fa fa-envelope prefix"></i>
+                  <input type="email" name="email" id="email_info" class="form-control form-control-sm validate">
+                  <label data-error="wrong" data-success="right" for="email_info">Your email</label>
+                </div>
+
+                <div class="md-form form-sm mb-4">
+                  <i class="fa fa-lock prefix"></i>
+                  <input type="password" name="password" id="password_info" class="form-control form-control-sm validate">
+                  <label data-error="wrong" data-success="right" for="password_info">Your password</label>
+                </div>
+                <div class="text-center mt-2">
+                  <input type="submit" name="login" value="Login" class="btnLogin btn btn-info">
+                </div>
+              </form>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <div class="options text-center text-md-right mt-1">
+                <p>Not a member? <a href="#" class="blue-text">Sign Up</a></p>
+                <p>Forgot <a href="#" class="blue-text">Password?</a></p>
+              </div>
+              <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+          <!--/.Panel 7-->
+
+          <!--Panel 8-->
+          <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+            <!--Body-->
+            <div class="modal-body">
+              <form action="#" method="post" id="frmSignup" >
+              <div class="md-form form-sm mb-5">
+                <i class="fa fa-envelope prefix"></i>
+                <input type="email" id="emailsu" class="form-control form-control-sm validate">
+                <label data-error="wrong" data-success="right" for="emailsu">Your email</label>
+              </div>
+
+              <div class="md-form form-sm mb-5">
+                <i class="fa fa-lock prefix"></i>
+                <input type="password" id="passws" class="form-control form-control-sm validate">
+                <label data-error="wrong" data-success="right" for="passws">Your password</label>
+              </div>
+
+              <div class="md-form form-sm mb-4">
+                <i class="fa fa-lock prefix"></i>
+                <input type="password" id="passwsr" class="form-control form-control-sm validate">
+                <label data-error="wrong" data-success="right" for="passwsr">Repeat password</label>
+              </div>
+
+              <div class="text-center form-sm mt-2">
+                <button class="btn btn-info btnSign">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+              </div>
+            </form>
+
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+              <div class="options text-right">
+                <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
+              </div>
+              <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!--/.Panel 8-->
+        </div>
+
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login / Register Form-->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Panier</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <!-- Shopping cart table -->
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="p-2 px-3 text-uppercase">Product</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Price</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Quantity</div>
+                  </th>
+                  <th scope="col" class="border-0 bg-light">
+                    <div class="py-2 text-uppercase">Remove</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="cart-list">
+                
+              </tbody>
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="row py-5 p-4 bg-white rounded shadow-sm">
+        <div class="col">
+          <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+          <div class="p-4">
+            <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                <h5 class="font-weight-bold">$400.00</h5>
+              </li>
+            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade product_view" id="product_view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" data-dismiss="modal" class="class pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+                
+            </div>
+            <div class="modal-body product-viewb" >
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <footer id="footer">
+
+        </footer>
+
+</body>
+<script>
+    $(document).ready(function() {
+
+      $(".btnSign").click(function(e){
+        e.preventDefault();
+      var email = $("#emailsu").val();
+      var password = $("#passws").val();
+      var passwordr= $("#passwsr").val();
+     
+        $.post("/userAdd",{ email1: email, password1:password,password2:passwordr},
+        function(data) {
+        if(data==1) {
+          alert("account created");
+          $("#loginButt").addClass("d-none");
+          $("#modalLRForm").addClass("d-none");
+          $(".modal-backdrop").remove();
+          $(".navbar-nav").append("<li class='nav-item alighn-center'><p>Welcome !</p></li>");
+        } else{
+        alert("error while creating");
+        }
+        });
+      
+
+
+      });
+
+      $(".btnLogin").click(function(e){
+        //e.preventDefault();
+        var emaild = $("#email_info").val();
+        var passwordd = $("#password_info").val();
+        console.log(emaild);
+        console.log(passwordd);
+        console.log("klj,kl");
+          $.post("/user",{ emaip: emaild, passworp:passwordd},
+          function(data) {
+            console.log(data);
+            if(data==1){
+              alert("accoun created");
+            }
+           else if(data==2){
+             alert("password missing");
+              
+            }
+            else if(data==3){
+              alert("wrong password");
+            }
+            $("#loginButt").addClass("d-none");
+              $("#modalLRForm").addClass("d-none");
+              $(".modal-backdrop").remove();
+              $(".navbar-nav").append("<li class='nav-item alighn-center'><p>Welcome !</p></li>");
+          });
+
+
+        })
+      $(document).on('click','.cart',function(e){
+                  var items = [];
+                  console.log("sfs");
+                  $.getJSON("http://127.0.0.1:8000/index/product/4", function(data) {
+                  console.log(data);
+                  
+                      
+                  items.push("<tr><th scope='row' class='border-0'><div class='p-2'><img src='"+data.pic1+"' alt='' width='70' class='img-fluid rounded shadow-sm'><div class='ml-3 d-inline-block align-middle'><h5 class='mb-0'> <a href='' class='text-dark d-inline-block align-middle'>"+data.name+"</a></h5></div></div></th><td class='border-0 align-middle'><strong>"+data.prix+"</strong></td><td class='border-0 align-middle'><strong></strong></td><td class='border-0 align-middle rm'><a href='#' class='text-dark '><i class='fa fa-trash'></i></a></td></tr>");
+                  
+
+                  $(".cart-list").html(items);
+                  });
+            });
+      $(document).on('click','.pic-1',function(e){
+        var idProduit=$(this).data("id");
+          console.log(idProduit);
+            $.getJSON("http://127.0.0.1:8000/product/"+idProduit, function(data) {
+                var items = [];
+                console.log(data);
+                  console.log(data.prix);
+                    items.push("<div class='row'><div class='col-md-6 product-image3' ><img class='pic-1' src='"+data[0].pic1+"' class='img-responsive' style='height:90px;'></div><div class='col-md-6 product_content'><div class='rating'><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>(10 reviews)</div><p class='desc'>"+data[0].desc+"</p><h3 class='price'><span class='glyphicon glyphicon-usd'></span>"+data[0].prix+"</h3><div class='row'><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=' selected='>Color</option><option value='black'>Black</option><option value='white'>White</option><option value='gold'>Gold</option><option value='rose gold'>Rose Gold</option></select></div><!-- end col --><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=''>Capacity</option><option value=''>16GB</option><option value=''>32GB</option><option value=''>64GB</option><option value=''>128GB</option></select></div><!-- end col --><div class='col-md-4 col-sm-12'><select class='form-control' name='select'><option value='' selected='''>QTY</option><option value=''>1</option><option value=''>2</option><option value=''>3</option></select></div><!-- end col --></div><div class='space-ten'></div><div class='btn-ground'><button type='button' class='btn btn-primary' data-id='"+data[0].id+"' id='addtocart'><span class='glyphicon glyphicon-shopping-cart'></span> Add To Cart</button><button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-heart'></span> Add To Wishlist</button></div></div></div>");
+
+                $(".product-viewb").html(items);
+                
+        });
+                $(document).on('click','#addtocart',function(e){
+                  var items = [];
+                    console.log("addtocart");
+                      var idProduit=$(this).data("id");
+                      $.get("http://127.0.0.1:8000/PanierAdd/"+idProduit, function(data) {
+                        console.log(data);
+
+                });
+            });
+
+      });
+      console.log("test");
+    $.getJSON("http://127.0.0.1:8000/All/Categories", function(data) {
+               var items = [];
+            //console.log(data);
+            $.each(data, function(key,val) {
+                //console.log(val);
+                items.push("<li class='nav-link btn  categorie-btn' data-id='" + val.id + "'>" + val.name + "</li>");
+            });
+
+            $("<ul/>", {
+                "class": "my-new-list",
+                html: items.join("")
+            }).appendTo("#sticky-sidebar");
+            $.getJSON("http://127.0.0.1:8000/All/Products/124", function(data) {
+                var items = [];
+                $.each(data, function(key, val) {
+                    items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='pic-1' src='"+val.pic1+"' data-id='"+val.id+"'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>"+val.name+"</a></h3><div class='price'>"+val.prix+"</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
+                });
+
+                $("#product-view").html(items);
+            $(".categorie-btn").click(function(){
+                var idCategorie=$(this).data("id");
+                console.log(idCategorie);
+                $.getJSON("http://127.0.0.1:8000/All/Products/"+idCategorie, function(data) {
+                var items = [];
+                $.each(data, function(key, val) {
+                    items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='pic-1' src='"+val.pic1+"' data-id='"+val.id+"'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>"+val.name+"</a></h3><div class='price'>"+val.prix+"</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
+                });
+
+                $("#product-view").html(items);
+
+                
+            });
+            
+        
+
+
+
+    });
+    });
+     });
+      });
+</script>
+
+</html>
