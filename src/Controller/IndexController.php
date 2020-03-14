@@ -13,6 +13,7 @@ class IndexController extends AbstractController
     }
     public function Array()
     {
+        
         return $this->json(array (array("name"=>"Informatique","id"=>1),
         array("name"=>"Multimedia","id"=>2),
         array("name"=>"Ordinateur","id"=>3),
