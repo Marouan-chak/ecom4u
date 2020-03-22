@@ -25,13 +25,13 @@ $ cd ecom4u
 The symfony binary provides a tool to check if your computer meets these requirements. Open your console terminal and run this command:
 ```shell
 $ symfony check:requirements
-```shell
+```
 4. Install [doctrine] support via the orm Symfony pack, as well as the MakerBundle, which will help generate some code:
 [doctrine]: https://symfony.com/doc/current/doctrine.html
 
 ```shell
 $ composer require symfony/orm-pack
-```shell
+```
 
 
 ### Configuring the Database
@@ -53,7 +53,7 @@ Now that your connection parameters are setup, Doctrine can create the db_name d
 
 ```shell
 $ php bin/console doctrine:database:create
-```shell
+```
 
 End with an example of getting some data out of the system or using it for a little demo
 
@@ -62,12 +62,12 @@ End with an example of getting some data out of the system or using it for a lit
 Create migration for the database:
 ```shell
 $ php bin/console make:migration
-```shell
+```
 
 then migrate:
 ```shell
 php bin/console doctrine:migrations:migrate
-```shell
+```
 
 
 ### Run the website
@@ -76,7 +76,7 @@ From the project folder, run the following command:
 
 ```shell
 $ symfony server:start
-```shell
+```
  then **You must access the URL localhost/produits to populate the database with products**. After that you can access the website from localhost/index
 
 
