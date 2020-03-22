@@ -337,19 +337,22 @@
     $.getJSON("http://127.0.0.1:8000/All/Categories", function(data) {
                var items = [];
             //console.log(data);
-            $.each(data, function(key,val) {
-                //console.log(val);
+            $.each(JSON.parse(data), function(key, val) {
+              //$.each(this, function(key, val) {
+                //console.log(key);
+                console.log(val);
                 items.push("<li class='nav-link btn  categorie-btn' data-id='" + val.id + "'>" + val.name + "</li>");
+             // });
             });
 
             $("<ul/>", {
                 "class": "my-new-list",
                 html: items.join("")
             }).appendTo("#sticky-sidebar");
-            $.getJSON("http://127.0.0.1:8000/All/Products/124", function(data) {
+            $.getJSON("http://127.0.0.1:8000/All/Products/", function(data) {
                 var items = [];
-                $.each(data, function(key, val) {
-                    items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='pic-1' src='"+val.pic1+"' data-id='"+val.id+"'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>"+val.name+"</a></h3><div class='price'>"+val.prix+"</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
+                $.each(JSON.parse(data), function(key, val) {
+                    items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='pic-1' src='"+val.image+"' data-id='"+val.id+"'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>"+val.name+"</a></h3><div class='price'>"+val.prix+"</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
                 });
 
                 $("#product-view").html(items);

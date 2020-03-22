@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
-
+use App\Entity\Produit;
+use App\Entity\Categories;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -11,14 +13,53 @@ class IndexController extends AbstractController
     {
         return $this->render('indeex.html.twig');
     }
+    public function Products(){
+        $repository = $this->getDoctrine()->getRepository(Produit::class);
+        $products = $repository->findAll();
+        $response = array();
+        foreach ($products as $product) {
+            $response[] = array(
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'categorie' => $product->getCategorie(),
+                'description' => $product->getDescription(),
+                'prix' => $product->getPrix(),
+                'image' => $product->getImage(),
+                // other fields
+            );
+        }
+        return new JsonResponse(json_encode($response));
+    }
     public function Array()
     {
-        
-        return $this->json(array (array("name"=>"Informatique","id"=>1),
-        array("name"=>"Multimedia","id"=>2),
-        array("name"=>"Ordinateur","id"=>3),
-        array("name"=>"Telephone","id"=>4)
-    ));}
+        //Get all products
+        /*$repository = $this->getDoctrine()->getRepository(Produit::class);
+        $products = $repository->findAll();
+        $response = array();
+        foreach ($products as $product) {
+            $response[] = array(
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'categorie' => $product->getCategorie(),
+                'description' => $product->getDescription(),
+                'prix' => $product->getPrix(),
+                'image' => $product->getImage(),
+                // other fields
+            );
+        }
+        return new JsonResponse(json_encode($response));}*/
+        $repository = $this->getDoctrine()->getRepository(Categories::class);
+        $categories = $repository->findAll();
+        $response = array();
+        foreach ($categories as $categorie) {
+            $response[] = array(
+                'id' => $categorie->getId(),
+                'name' => $categorie->getName(),
+                // other fields
+            );
+        }
+        return new JsonResponse(json_encode($response));}
+
     public function Informatique()
     {
         return $this->json(array (array("name"=>"Clavier Logitech","id"=>1),

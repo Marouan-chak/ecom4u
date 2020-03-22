@@ -1,6 +1,9 @@
 index:
   path: /index
   controller: App\Controller\IndexController::Default
+Products:
+  path: /All/Products
+  controller: App\Controller\IndexController::Products
 catt:
   path: /All/Categories
   controller: App\Controller\IndexController::Array
