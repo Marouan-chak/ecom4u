@@ -13,7 +13,7 @@ Before startingg, you have to clone the project:
 ```shell
 $ git clone https://github.com/Marouan-chak/ecom4u.git
 $ cd ecom4u
-```shell
+```
 
 1. Install PHP 7.2.5 or higher and these PHP extensions (which are installed and enabled by default in most PHP 7 installations): Ctype, iconv, JSON, PCRE, Session, SimpleXML, and Tokenizer.
 2. Install [composer], which is used to install PHP packages;
