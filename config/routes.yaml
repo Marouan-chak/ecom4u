@@ -23,7 +23,7 @@ TelephoneProd:
   path: /index/categories/4
   controller: App\Controller\IndexController::Telephone
 ProdSearch:
-  path: /index/product/{idProduct}
+  path: /index/produit/{idProduct}
   controller: App\Controller\IndexController::FindProduct
 useradd:
   path: /userAdd
