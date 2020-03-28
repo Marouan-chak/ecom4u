@@ -10,20 +10,8 @@ catt:
 array:
   path: /index/categories
   controller: App\Controller\IndexController::Array
-InformatiqueProd:
-  path: /index/categories/1
-  controller: App\Controller\IndexController::Informatique
-OrdinateurProd:
-  path: /index/categories/2
-  controller: App\Controller\IndexController::Ordinateur
-MultipmediaProd:
-  path: /index/categories/3
-  controller: App\Controller\IndexController::Multimedia
-TelephoneProd:
-  path: /index/categories/4
-  controller: App\Controller\IndexController::Telephone
 ProdSearch:
-  path: /index/produit/{idProduct}
+  path: /index/product/{idProduct}
   controller: App\Controller\IndexController::FindProduct
 useradd:
   path: /userAdd
@@ -31,3 +19,6 @@ useradd:
 userConnect:
   path: /user
   controller: App\Controller\IndexController::checkUser
+CategSearch:
+  path: /index/categorie/{idCategorie}
+  controller: App\Controller\IndexController::ProductsByCategorieId
