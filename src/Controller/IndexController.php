@@ -115,8 +115,20 @@ class IndexController extends AbstractController
     public function findProduct($idProduct){
         //$productId = $request->attributes->get('_route_params');
         //Find product by id and return a json object with all product information
-        return $this->json(array ("name"=>"Galaxy s10+","desc"=>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti ad culpa assumenda corporis iusto quisquam hic amet incidunt eos molestias, perferendis, quia ullam, minus sapiente suscipit. Debitis at quam veritatis!","id"=>1,"pic1"=>"https://www.cdiscount.com/pdt2/2/8/n/1/400x400/samgalaxs10p128n/rw/samsung-galaxy-s10-128-go-noir-prisme.jpg","pic2"=>"https://www.notebookcheck.biz/fileadmin/_processed_/3/5/csm_Samsung_Galaxy_S10_Plus_5594_5bd9b9c7be.jpg","prix"=>749)
-);
+        $repository = $this->getDoctrine()->getRepository(Produit::class);
+        $product = $repository->find($idProduct);
+
+        $response[] = array(
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+            'categorie' => $product->getCategorie(),
+            'description' => $product->getDescription(),
+            'prix' => $product->getPrix(),
+            'image' => $product->getImage(),
+            // other fields
+        );
+
+        return new Response(json_encode($response));
     }
 }
 
