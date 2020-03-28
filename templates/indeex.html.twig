@@ -141,142 +141,121 @@
 
 									<!--Body-->
 									<div class="modal-body">
-										<form action="#" method="post" id="frmSignup">
-											<div class="md-form form-sm mb-5">
-												<i class="fa fa-envelope prefix"></i>
-												<input type="email" id="emailsu" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="emailsu">Your email</label>
-											</div>
+										{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-											<div class="md-form form-sm mb-5">
-												<i class="fa fa-lock prefix"></i>
-												<input type="password" id="passws" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="passws">Your password</label>
-											</div>
-
-											<div class="md-form form-sm mb-4">
-												<i class="fa fa-lock prefix"></i>
-												<input type="password" id="passwsr" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="passwsr">Repeat password</label>
-											</div>
-
-											<div class="text-center form-sm mt-2">
-												<button class="btn btn-info btnSign">Sign up
-													<i class="fa fa-sign-in ml-1"></i>
-												</button>
-											</div>
-										</form>
-
-									</div>
-									<!--Footer-->
-									<div class="modal-footer">
-										<div class="options text-right">
-											<p class="pt-1">Already have an account?
-												<a href="#" class="blue-text">Log In</a>
-											</p>
+										{% block body %}
+											<h1>User Sign Up:</h1>
+											{{ form(form) }}{% endblock %}
 										</div>
-										<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+										<!--Footer-->
+										<div class="modal-footer">
+											<div class="options text-right">
+												<p class="pt-1">Already have an account?
+													<a href="#" class="blue-text">Log In</a>
+												</p>
+											</div>
+											<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+										</div>
 									</div>
+									<!--/.Panel 8-->
 								</div>
-								<!--/.Panel 8-->
-							</div>
 
+							</div>
 						</div>
+						<!--/.Content-->
 					</div>
-					<!--/.Content-->
 				</div>
-			</div>
-			<!--Modal: Login / Register Form-->
-			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Panier</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div
-							class="modal-body">
-
-							<!-- Shopping cart table -->
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col" class="border-0 bg-light">
-												<div class="p-2 px-3 text-uppercase">Product</div>
-											</th>
-											<th scope="col" class="border-0 bg-light">
-												<div class="py-2 text-uppercase">Price</div>
-											</th>
-											<th scope="col" class="border-0 bg-light">
-												<div class="py-2 text-uppercase">Quantity</div>
-											</th>
-											<th scope="col" class="border-0 bg-light">
-												<div class="py-2 text-uppercase">Remove</div>
-											</th>
-										</tr>
-									</thead>
-									<tbody class="cart-list"></tbody>
-								</table>
+				<!--Modal: Login / Register Form-->
+				<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Panier</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="row py-5 p-4 bg-white rounded shadow-sm">
-								<div class="col">
-									<div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary
-									</div>
-									<div class="p-4">
-										<p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
-										<ul class="list-unstyled mb-4">
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Order Subtotal
-												</strong>
-												<strong>$390.00</strong>
-											</li>
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Shipping and handling</strong>
-												<strong>$10.00</strong>
-											</li>
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Tax</strong>
-												<strong>$0.00</strong>
-											</li>
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Total</strong>
-												<h5 class="font-weight-bold">$400.00</h5>
-											</li>
-										</ul>
-										<a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
-									</div>
+							<div
+								class="modal-body">
+
+								<!-- Shopping cart table -->
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col" class="border-0 bg-light">
+													<div class="p-2 px-3 text-uppercase">Product</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Price</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Quantity</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Remove</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody class="cart-list"></tbody>
+									</table>
 								</div>
 							</div>
+							<div class="modal-footer">
+								<div class="row py-5 p-4 bg-white rounded shadow-sm">
+									<div class="col">
+										<div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary
+										</div>
+										<div class="p-4">
+											<p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+											<ul class="list-unstyled mb-4">
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Order Subtotal
+													</strong>
+													<strong>$390.00</strong>
+												</li>
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Shipping and handling</strong>
+													<strong>$10.00</strong>
+												</li>
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Tax</strong>
+													<strong>$0.00</strong>
+												</li>
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Total</strong>
+													<h5 class="font-weight-bold">$400.00</h5>
+												</li>
+											</ul>
+											<a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="modal fade product_view" id="product_view">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<a href="#" data-dismiss="modal" class="class pull-right">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>
+				<div class="modal fade product_view" id="product_view">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<a href="#" data-dismiss="modal" class="class pull-right">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
 
+							</div>
+							<div class="modal-body product-viewb"></div>
 						</div>
-						<div class="modal-body product-viewb"></div>
 					</div>
 				</div>
-			</div>
 
 
-			<footer id="footer"></footer>
+				<footer id="footer"></footer>
 
-		</body>
-		<script>
-			$(document).ready(function () {
+			</body>
+			<script>
+				$(document).ready(function () {
 
 $(".btnSign").click(function (e) {
 e.preventDefault();
@@ -405,6 +384,7 @@ $("#product-view").html(items);
 });
 });
 });
-		</script>
+			</script>
+		</body>
 	</body>
 </html>
