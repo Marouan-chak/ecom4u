@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,26 @@ class Produit
      * @ORM\Column(type="text")
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantité;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="produit")
+     */
+    private $commande;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="produit")
+     */
+    private $feedback;
+
+    public function __construct()
+    {
+        $this->feedback = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +125,61 @@ class Produit
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getQuantité(): ?int
+    {
+        return $this->quantité;
+    }
+
+    public function setQuantité(int $quantité): self
+    {
+        $this->quantité = $quantité;
+
+        return $this;
+    }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->commande;
+    }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback[] = $feedback;
+            $feedback->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->contains($feedback)) {
+            $this->feedback->removeElement($feedback);
+            // set the owning side to null (unless already changed)
+            if ($feedback->getProduit() === $this) {
+                $feedback->setProduit(null);
+            }
+        }
 
         return $this;
     }
