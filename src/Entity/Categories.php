@@ -28,6 +28,11 @@ class Categories
      */
     private $produits;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -77,6 +82,18 @@ class Categories
                 $produit->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
