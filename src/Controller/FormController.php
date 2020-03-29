@@ -17,7 +17,7 @@ class FormController extends AbstractController
         $user=new User();
         $form = $this->createForm(RegisterType::class,$user);
         return $this->render('indeex.html.twig', [
-            'register_form' => $form->createView()
+            'form' => $form->createView()
         ]);
     }
 }
