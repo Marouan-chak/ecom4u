@@ -47,7 +47,7 @@ class Produit
     /**
      * @ORM\Column(type="integer")
      */
-    private $quantité;
+    private $quantite;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="produit")
@@ -129,14 +129,14 @@ class Produit
         return $this;
     }
 
-    public function getQuantité(): ?int
+    public function getquantite(): ?int
     {
-        return $this->quantité;
+        return $this->quantite;
     }
 
-    public function setQuantité(int $quantité): self
+    public function setquantite(int $quantite): self
     {
-        $this->quantité = $quantité;
+        $this->quantite = $quantite;
 
         return $this;
     }
@@ -182,5 +182,9 @@ class Produit
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 }

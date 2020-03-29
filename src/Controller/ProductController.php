@@ -21,22 +21,29 @@ class ProductController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $category1 = new Categories();
         $category1->setName('Ordinateurs');
+        $category1->setDescription('ordinateur portable et bureau');
         $category2 = new Categories();
+        $category2->setDescription('vetement homme et femme');
         $category2->setName('Vêtements');
          $category3 = new Categories();
         $category3->setName('Téléphone');
+        $category3->setDescription('smartphones');
         $category4 = new Categories();
         $category4->setName('High-Tech');
+        $category4->setDescription('tout type de produits high-Tech');
         $category5 = new Categories();
         $category5->setName('Livres');
+        $category5->setDescription('livres anciens et nouveaux');
         $category6 = new Categories();
         $category6->setName('Multimédia');
+        $category6->setDescription('Multimédia');
         $product0 = new Produit();
         $product0->setName('Rii RK907 Clavier Filaire Compact Ultra-Mince USB Version Française(AZERTY) pour Mac et PC, Windows 10/8 / 7 / Vista/XP (Noir)');
         $product0->setPrix(14.99);
         $product0->setDescription('- Clavier filaire compact ultra-mince taille complète (104 touches) avec pavé numérique\n- Connexion USB filaire simple, vous profiterez d’une expérience de frappe confortable et silencieuse');
         $product0->setImage('https://images-na.ssl-images-amazon.com/images/I/71LvOecD%2BeL._AC_SL1500_.jpg');
         $product0->setCategorie($category4);
+        $product0->setquantite(10);        
         $product1 = new Produit();
 
         $product1->setDescription("Samsung Galaxy S10 Plus\n Samsung nous surprend encore avec la nouvelle génération de sa gamme Galaxy. Le nouvel Samsung Galaxy S10 apporte des améliorations significatives par rapport à son prédécesseur. L'écranInfinity-O de 6,4, déverrouillage avec une empreinte digitale intégré dans lécran,3 appareils photo, PowerSharesans fil et plus.");
@@ -44,6 +51,7 @@ class ProductController extends AbstractController
         $product1->setName("Galaxy s10+");
         $product1->setPrix(749);
         $product1->setCategorie($category3);
+        $product1->setquantite(10);        
 
         $product2 = new Produit();
 
@@ -52,6 +60,7 @@ class ProductController extends AbstractController
     $product2->setName("Google Pixel 4");
     $product2->setPrix(946);
     $product2->setCategorie($category3);
+    $product2->setquantite(10);        
 
 
 
@@ -62,6 +71,8 @@ class ProductController extends AbstractController
     $product3->setImage("https://www.cdiscount.com/pdt2/2/8/b/1/700x700/huaweip30pro128b/rw/huawei-p30-pro-noir-128-go.jpg");
     $product3->setName("Huawei P30 Pro");
     $product3->setPrix(649);
+    $product3->setquantite(10);        
+
     $product4 = new Produit();
 
     $product4->setDescription("Apple iPhone 11 Pro (64 Go) - Gris Sidéral");
@@ -69,6 +80,8 @@ class ProductController extends AbstractController
     $product4->setImage("https://images-na.ssl-images-amazon.com/images/I/715HCLsOHbL._AC_SL1500_.jpg");
     $product4->setName("Iphone 11");
     $product4->setPrix(1200);
+    $product4->setquantite(10);        
+
 
 
 
@@ -78,6 +91,7 @@ class ProductController extends AbstractController
     $product5->setImage("https://www.cdiscount.com/pdt2/4/9/6/1/700x700/jvc4975769453496/rw/jvc-ha-s60bt-b-e-casque-bluetooth-circum-aural.jpg");
     $product5->setName("Casque");
     $product5->setPrix(20);
+    $product5->setquantite(10);        
 
 
 
@@ -87,6 +101,7 @@ class ProductController extends AbstractController
     $product6->setImage("https://www.cdiscount.com/pdt2/8/3/5/1/700x700/sam3700587428835/rw/samsung-ehs64avfwe-kit-pieton-stereo-filaire-origi.jpg");
     $product6->setName("Ecouteurs");
     $product6->setPrix(30);
+    $product6->setquantite(10);        
 
 
 
@@ -97,6 +112,7 @@ class ProductController extends AbstractController
     $product7->setImage("https://www.cdiscount.com/pdt2/3/9/4/1/700x700/auc0699917014394/rw/microphone-a-condensateur-podcasting-studio-enreg.jpg");
     $product7->setName("Microphone");
     $product7->setPrix(30);
+    $product7->setquantite(10);        
 
 
     $product8 = new Produit();
@@ -105,6 +121,7 @@ class ProductController extends AbstractController
     $product8->setImage("https://www.cdiscount.com/pdt2/0/5/5/1/700x700/960001055/rw/logitech-webcam-hd-pro-c920-refresh-microphone-i.jpg");
     $product8->setName("Web Cam");
     $product8->setPrix(25);
+    $product8->setquantite(10);        
 
 
 
@@ -114,6 +131,7 @@ class ProductController extends AbstractController
     $product9->setImage("https://www.cdiscount.com/pdt2/0/1/8/1/700x700/tos4260557510018/rw/toshiba-disque-dur-externe-canvio-basics-1-t.jpg");
     $product9->setName("Disque dur");
     $product9->setPrix(100);
+    $product9->setquantite(10);        
 
 
 
@@ -124,6 +142,7 @@ class ProductController extends AbstractController
     $product10->setImage("https://www.cdiscount.com/pdt2/b/o/x/1/700x700/yd3400c5fhbox/rw/amd-processeur-ryzen-5-3400g-wraith-spire-cooler.jpg");
     $product10->setName("Proccesseur");
     $product10->setPrix(150);
+    $product10->setquantite(10);        
 
 
 
@@ -135,6 +154,7 @@ class ProductController extends AbstractController
     $product11->setImage("https://www.cdiscount.com/pdt2/0/2/8/1/700x700/auc6954524896028/rw/16g-carte-memoire-sd-grande-vitesse-classe-10-16-g.jpg");
     $product11->setName("Carte memoire sd");
     $product11->setPrix(25);
+    $product11->setquantite(10);        
 
 
 
@@ -146,6 +166,7 @@ class ProductController extends AbstractController
     $product12->setImage("https://www.cdiscount.com/pdt2/7/3/6/1/700x700/tem6427643888736/rw/256go-cle-usb-3-0-stick-rotatif-pendrive-memoire-f.jpg");
     $product12->setName("Cle USB");
     $product12->setPrix(1200);
+    $product12->setquantite(10);        
 
 
 
@@ -156,6 +177,7 @@ class ProductController extends AbstractController
     $product13->setImage("https://www.cdiscount.com/pdt2/n/f/a/1/700x700/bunhp17by0085nfa/rw/hp-pc-portable-17-3-hd-celeron-n4000-ram-8g.jpg");
     $product13->setName("HP");
     $product13->setPrix(1200);
+    $product13->setquantite(10);        
 
 
     $product14 = new Produit();
@@ -166,6 +188,7 @@ class ProductController extends AbstractController
     $product14->setImage("https://www.cdiscount.com/pdt2/6/5/2/1/700x700/del5397184350652/rw/dell-pc-portable-inspiron-15-5593-15-6-fhd.jpg");
     $product14->setName("DELL");
     $product14->setPrix(800);
+    $product14->setquantite(10);        
 
 
 
@@ -177,6 +200,7 @@ class ProductController extends AbstractController
     $product15->setImage("https://www.cdiscount.com/pdt2/f/n/a/1/700x700/mqd32fna/rw/apple-macbook-air-13-3-intel-core-i5-ram-8go.jpg" );
     $product15->setName("Mac Book Air");
     $product15->setPrix(1200);
+    $product15->setquantite(10);        
 
 
 
@@ -188,6 +212,7 @@ class ProductController extends AbstractController
     $product16->setImage("https://www.cdiscount.com/pdt2/0/4/7/1/700x700/tos4051528307047/rw/toshiba-r50-c-14f-intel-win10home.jpg");
     $product16->setName("Toshiba");
     $product16->setPrix(700);
+    $product16->setquantite(10);        
 
 
 
