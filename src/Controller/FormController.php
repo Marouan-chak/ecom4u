@@ -23,6 +23,7 @@ class FormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             $em=$this->getDoctrine()->getManager();
+            $user->setRole('ROLE_USER');
             $em->persist($user);
             $em->flush();
         }
