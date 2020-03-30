@@ -41,10 +41,18 @@
 										<span class="badge badge-danger" id="nb-prod">3</span>
 									</button>
 								</li>
-								<li class="nav-item ">
-									<button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt">
-										<i class="fa fa-user mr-1"></i>Log In / Register</button>
-								</li>
+								{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+									<li class="nav-item ">
+										<a href="{{ logout_path() }}" class="btn btn-danger btn-rounded my-3" id="logoutButt">
+											<i class="fa fa-user mr-1"></i>Logout</a>
+									</li>
+								{% else %}
+									<li class="nav-item ">
+										<button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt">
+											<i class="fa fa-user mr-1"></i>Log In / Register</button>
+									</li>
+								{% endif %}
+
 							</ul>
 						</div>
 					</div>
@@ -101,17 +109,18 @@
 
 									<!--Body-->
 									<div class="modal-body mb-1">
-										<form action="#" method="post" id="frmLogin">
+
+										<form action="{{ path('login') }}" method="POST" id="frmLogin">
 
 											<div class="md-form form-sm mb-5">
 												<i class="fa fa-envelope prefix"></i>
-												<input type="email" name="email" id="email_info" class="form-control form-control-sm validate">
+												<input type="email" name="_email" id="email_info" class="form-control form-control-sm validate">
 												<label data-error="wrong" data-success="right" for="email_info">Your email</label>
 											</div>
 
 											<div class="md-form form-sm mb-4">
 												<i class="fa fa-lock prefix"></i>
-												<input type="password" name="password" id="password_info" class="form-control form-control-sm validate">
+												<input type="password" name="_password" id="password_info" class="form-control form-control-sm validate">
 												<label data-error="wrong" data-success="right" for="password_info">Your password</label>
 											</div>
 											<div class="text-center mt-2">
@@ -136,33 +145,35 @@
 								<!--/.Panel 7-->
 
 								<!--Panel 8-->
-								<div
-									class="tab-pane fade" id="panel8" role="tabpanel">
+								{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
 
-									<!--Body-->
-									<div class="modal-body">
-										{% form_theme form 'bootstrap_4_layout.html.twig' %}
+									<div
+										class="tab-pane fade" id="panel8" role="tabpanel">
+										<!--Body-->
+										<div class="modal-body">
 
-										{% block body %}
-											<h2>User Sign Up:</h2>
-											{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
-											{{ form(form) }}
-												{{ form_end(form) }}
-											{% endblock %}
-										</div>
-										<!--Footer-->
-										<div class="modal-footer">
-											<div class="options text-right">
-												<p class="pt-1">Already have an account?
-													<a href="#" class="blue-text">Log In</a>
-												</p>
+											{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+											{% block body %}
+												<h2>User Sign Up:</h2>
+												{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
+												{{ form(form) }}
+													{{ form_end(form) }}
+												{% endblock %}
 											</div>
-											<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+											<!--Footer-->
+											<div class="modal-footer">
+												<div class="options text-right">
+													<p class="pt-1">Already have an account?
+														<a href="#" class="blue-text">Log In</a>
+													</p>
+												</div>
+												<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+											</div>
 										</div>
+										<!--/.Panel 8-->
 									</div>
-									<!--/.Panel 8-->
-								</div>
-
+								{% endif %}
 							</div>
 						</div>
 						<!--/.Content-->
@@ -390,4 +401,4 @@ $("#product-view").html(items);
 			</script>
 		</body>
 	</body>
-</html>
+</html></body></html></body></html></body></html>

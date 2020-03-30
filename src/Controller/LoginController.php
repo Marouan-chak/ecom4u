@@ -16,4 +16,19 @@ class LoginController extends AbstractController
             'controller_name' => 'LoginController',
         ]);
     }
+    public function login(Request $request, AuthenticationUtils $utils)
+    {
+        $error=$utils->getLastAuthenticationError();
+        $lastUsername=$utils->getLastUsername();
+        return $this->render('indeex.html.twig', [
+            'error' => $error,
+            'last_username' => $lastUsername
+        ]);
+    }
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout(){
+
+    }
 }
