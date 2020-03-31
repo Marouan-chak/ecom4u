@@ -5,11 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -17,9 +17,9 @@ class User
      * @ORM\Column(type="integer")
      */
     private $id;
-
+// le mail doit etre unique
     /**
-     * @ORM\Column(type="string", length=180)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
@@ -185,4 +185,43 @@ class User
 
         return $this;
     }
+    public function getRoles()
+    {
+        return [$this->role];
+    }
+    public function getUsername(): ?string
+    {
+        return $this->email;
+    }
+    public function getSalt()
+    {
+
+    }
+    public function eraseCredentials()
+    {
+
+    }
+
+    public function serialize()
+    {
+        return serialize([
+        $this->id,
+        $this->email,
+        $this->password,
+        $this->nom,
+        $this->prenom
+
+        ]);
+    }
+
+    public function unserialize($string)
+    {
+        list(        
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->nom,
+            $this->prenom) = unserialize($string,['allowed_classes'=>false]);
+    }
+
 }
