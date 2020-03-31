@@ -13,6 +13,9 @@ array:
 ProdSearch:
   path: /index/product/{idProduct}
   controller: App\Controller\IndexController::FindProduct
+ProdSearche:
+  path: /product/{idProduct}
+  controller: App\Controller\IndexController::FindProduct
 useradd:
   path: /userAdd
   controller: App\Controller\IndexController::addUser

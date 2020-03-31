@@ -41,10 +41,18 @@
 										<span class="badge badge-danger" id="nb-prod">3</span>
 									</button>
 								</li>
-								<li class="nav-item ">
-									<button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt">
-										<i class="fa fa-user mr-1"></i>Log In / Register</button>
-								</li>
+								{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+									<li class="nav-item ">
+										<a href="{{ logout_path() }}" class="btn btn-danger btn-rounded my-3" id="logoutButt">
+											<i class="fa fa-user mr-1"></i>Logout</a>
+									</li>
+								{% else %}
+									<li class="nav-item ">
+										<button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt">
+											<i class="fa fa-user mr-1"></i>Log In / Register</button>
+									</li>
+								{% endif %}
+
 							</ul>
 						</div>
 					</div>
@@ -101,17 +109,18 @@
 
 									<!--Body-->
 									<div class="modal-body mb-1">
-										<form action="#" method="post" id="frmLogin">
+
+										<form action="{{ path('login') }}" method="POST" id="frmLogin">
 
 											<div class="md-form form-sm mb-5">
 												<i class="fa fa-envelope prefix"></i>
-												<input type="email" name="email" id="email_info" class="form-control form-control-sm validate">
+												<input type="email" name="_email" id="email_info" class="form-control form-control-sm validate">
 												<label data-error="wrong" data-success="right" for="email_info">Your email</label>
 											</div>
 
 											<div class="md-form form-sm mb-4">
 												<i class="fa fa-lock prefix"></i>
-												<input type="password" name="password" id="password_info" class="form-control form-control-sm validate">
+												<input type="password" name="_password" id="password_info" class="form-control form-control-sm validate">
 												<label data-error="wrong" data-success="right" for="password_info">Your password</label>
 											</div>
 											<div class="text-center mt-2">
@@ -136,205 +145,139 @@
 								<!--/.Panel 7-->
 
 								<!--Panel 8-->
-								<div
-									class="tab-pane fade" id="panel8" role="tabpanel">
+								{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
 
-									<!--Body-->
-									<div class="modal-body">
-										<form action="#" method="post" id="frmSignup">
-											<div class="md-form form-sm mb-5">
-												<i class="fa fa-envelope prefix"></i>
-												<input type="email" id="emailsu" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="emailsu">Your email</label>
+									<div
+										class="tab-pane fade" id="panel8" role="tabpanel">
+										<!--Body-->
+										<div class="modal-body">
+
+											{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+											{% block body %}
+												<h2>User Sign Up:</h2>
+												{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
+												{{ form(form) }}
+													{{ form_end(form) }}
+												{% endblock %}
 											</div>
-
-											<div class="md-form form-sm mb-5">
-												<i class="fa fa-lock prefix"></i>
-												<input type="password" id="passws" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="passws">Your password</label>
+											<!--Footer-->
+											<div class="modal-footer">
+												<div class="options text-right">
+													<p class="pt-1">Already have an account?
+														<a href="#" class="blue-text">Log In</a>
+													</p>
+												</div>
+												<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
 											</div>
-
-											<div class="md-form form-sm mb-4">
-												<i class="fa fa-lock prefix"></i>
-												<input type="password" id="passwsr" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="passwsr">Repeat password</label>
-											</div>
-
-											<div class="text-center form-sm mt-2">
-												<button class="btn btn-info btnSign">Sign up
-													<i class="fa fa-sign-in ml-1"></i>
-												</button>
-											</div>
-										</form>
-
-									</div>
-									<!--Footer-->
-									<div class="modal-footer">
-										<div class="options text-right">
-											<p class="pt-1">Already have an account?
-												<a href="#" class="blue-text">Log In</a>
-											</p>
 										</div>
-										<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+										<!--/.Panel 8-->
 									</div>
-								</div>
-								<!--/.Panel 8-->
+								{% endif %}
 							</div>
-
 						</div>
+						<!--/.Content-->
 					</div>
-					<!--/.Content-->
 				</div>
-			</div>
-			<!--Modal: Login / Register Form-->
-			<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Panier</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div
-							class="modal-body">
-
-							<!-- Shopping cart table -->
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th scope="col" class="border-0 bg-light">
-												<div class="p-2 px-3 text-uppercase">Product</div>
-											</th>
-											<th scope="col" class="border-0 bg-light">
-												<div class="py-2 text-uppercase">Price</div>
-											</th>
-											<th scope="col" class="border-0 bg-light">
-												<div class="py-2 text-uppercase">Quantity</div>
-											</th>
-											<th scope="col" class="border-0 bg-light">
-												<div class="py-2 text-uppercase">Remove</div>
-											</th>
-										</tr>
-									</thead>
-									<tbody class="cart-list"></tbody>
-								</table>
+				<!--Modal: Login / Register Form-->
+				<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Panier</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="row py-5 p-4 bg-white rounded shadow-sm">
-								<div class="col">
-									<div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary
-									</div>
-									<div class="p-4">
-										<p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
-										<ul class="list-unstyled mb-4">
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Order Subtotal
-												</strong>
-												<strong>$390.00</strong>
-											</li>
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Shipping and handling</strong>
-												<strong>$10.00</strong>
-											</li>
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Tax</strong>
-												<strong>$0.00</strong>
-											</li>
-											<li class="d-flex justify-content-between py-3 border-bottom">
-												<strong class="text-muted">Total</strong>
-												<h5 class="font-weight-bold">$400.00</h5>
-											</li>
-										</ul>
-										<a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+							<div
+								class="modal-body">
+
+								<!-- Shopping cart table -->
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col" class="border-0 bg-light">
+													<div class="p-2 px-3 text-uppercase">Product</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Price</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Quantity</div>
+												</th>
+												<th scope="col" class="border-0 bg-light">
+													<div class="py-2 text-uppercase">Remove</div>
+												</th>
+											</tr>
+										</thead>
+										<tbody class="cart-list"></tbody>
+									</table>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<div class="row py-5 p-4 bg-white rounded shadow-sm">
+									<div class="col">
+										<div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary
+										</div>
+										<div class="p-4">
+											<p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+											<ul class="list-unstyled mb-4">
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Order Subtotal
+													</strong>
+													<strong>$390.00</strong>
+												</li>
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Shipping and handling</strong>
+													<strong>$10.00</strong>
+												</li>
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Tax</strong>
+													<strong>$0.00</strong>
+												</li>
+												<li class="d-flex justify-content-between py-3 border-bottom">
+													<strong class="text-muted">Total</strong>
+													<h5 class="font-weight-bold">$400.00</h5>
+												</li>
+											</ul>
+											<a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="modal fade product_view" id="product_view">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<a href="#" data-dismiss="modal" class="class pull-right">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>
+				<div class="modal fade product_view" id="product_view">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<a href="#" data-dismiss="modal" class="class pull-right">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
 
+							</div>
+
+							<div class="modal-body product-viewb"></div>
 						</div>
-						<div class="modal-body product-viewb"></div>
 					</div>
 				</div>
-			</div>
 
 
-			<footer id="footer"></footer>
+				<footer id="footer"></footer>
 
-		</body>
-		<script>
-			$(document).ready(function () {
-
-$(".btnSign").click(function (e) {
-e.preventDefault();
-var email = $("#emailsu").val();
-var password = $("#passws").val();
-var passwordr = $("#passwsr").val();
-
-$.post("/userAdd", {
-email1: email,
-password1: password,
-password2: passwordr
-}, function (data) {
-if (data == 1) {
-alert("account created");
-$("#loginButt").addClass("d-none");
-$("#modalLRForm").addClass("d-none");
-$(".modal-backdrop").remove();
-$(".navbar-nav").append("<li class='nav-item alighn-center'><p>Welcome !</p></li>");
-} else {
-alert("error while creating");
-}
-});
+			</body>
+			<script>
+				$(document).ready(function () {
 
 
-});
-
-$(".btnLogin").click(function (e) { // e.preventDefault();
-var emaild = $("#email_info").val();
-var passwordd = $("#password_info").val();
-console.log(emaild);
-console.log(passwordd);
-console.log("klj,kl");
-$.post("/user", {
-emaip: emaild,
-passworp: passwordd
-}, function (data) {
-console.log(data);
-if (data == 1) {
-alert("accoun created");
-} else if (data == 2) {
-alert("password missing");
-
-} else if (data == 3) {
-alert("wrong password");
-}
-$("#loginButt").addClass("d-none");
-$("#modalLRForm").addClass("d-none");
-$(".modal-backdrop").remove();
-$(".navbar-nav").append("<li class='nav-item alighn-center'><p>Welcome !</p></li>");
-});
-
-
-})
 $(document).on('click', '.cart', function (e) {
 var items = [];
 console.log("sfs");
 $.getJSON("http://127.0.0.1:8000/index/product/4", function (data) {
-console.log(data);
+console.log("zab");
 
 
 items.push("<tr><th scope='row' class='border-0'><div class='p-2'><img src='" + data.pic1 + "' alt='' width='70' class='img-fluid rounded shadow-sm'><div class='ml-3 d-inline-block align-middle'><h5 class='mb-0'> <a href='' class='text-dark d-inline-block align-middle'>" + data.name + "</a></h5></div></div></th><td class='border-0 align-middle'><strong>" + data.prix + "</strong></td><td class='border-0 align-middle'><strong></strong></td><td class='border-0 align-middle rm'><a href='#' class='text-dark '><i class='fa fa-trash'></i></a></td></tr>");
@@ -343,15 +286,14 @@ items.push("<tr><th scope='row' class='border-0'><div class='p-2'><img src='" + 
 $(".cart-list").html(items);
 });
 });
-$(document).on('click', '.pic-1', function (e) {
+$(document).on('click', '.image', function (e) {
 var idProduit = $(this).data("id");
 console.log(idProduit);
-$.getJSON("http://127.0.0.1:8000/product/" + idProduit, function (data) {
+$.getJSON("http://127.0.0.1:8000/index/product/" + idProduit, function (data) {
 var items = [];
-console.log(data);
-console.log(data.prix);
-items.push("<div class='row'><div class='col-md-6 product-image3' ><img class='pic-1' src='" + data[0].pic1 + "' class='img-responsive' style='height:90px;'></div><div class='col-md-6 product_content'><div class='rating'><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>(10 reviews)</div><p class='desc'>" + data[0].desc + "</p><h3 class='price'><span class='glyphicon glyphicon-usd'></span>" + data[0].prix + "</h3><div class='row'><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=' selected='>Color</option><option value='black'>Black</option><option value='white'>White</option><option value='gold'>Gold</option><option value='rose gold'>Rose Gold</option></select></div><!-- end col --><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=''>Capacity</option><option value=''>16GB</option><option value=''>32GB</option><option value=''>64GB</option><option value=''>128GB</option></select></div><!-- end col --><div class='col-md-4 col-sm-12'><select class='form-control' name='select'><option value='' selected='''>QTY</option><option value=''>1</option><option value=''>2</option><option value=''>3</option></select></div><!-- end col --></div><div class='space-ten'></div><div class='btn-ground'><button type='button' class='btn btn-primary' data-id='" + data[0].id + "' id='addtocart'><span class='glyphicon glyphicon-shopping-cart'></span> Add To Cart</button><button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-heart'></span> Add To Wishlist</button></div></div></div>");
-
+console.log("anaa");
+items.push("<div class='row'><div class='col-md-6 product-image3' ><img class='image' src='" + data[0].image + "' class='img-responsive' style='height:90px;'></div><div class='col-md-6 product_content'><div class='rating'><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>(10 reviews)</div><p class='desc'>" + data[0].description + "</p><h3 class='price'><span class='glyphicon glyphicon-usd'></span>" + data[0].prix + "</h3><div class='row'><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=' selected='>Color</option><option value='black'>Black</option><option value='white'>White</option><option value='gold'>Gold</option><option value='rose gold'>Rose Gold</option></select></div><!-- end col --><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=''>Capacity</option><option value=''>16GB</option><option value=''>32GB</option><option value=''>64GB</option><option value=''>128GB</option></select></div><!-- end col --><div class='col-md-4 col-sm-12'><select class='form-control' name='select'><option value='' selected='''>QTY</option><option value=''>1</option><option value=''>2</option><option value=''>3</option></select></div><!-- end col --></div><div class='space-ten'></div><div class='btn-ground'><button type='button' class='btn btn-primary' data-id='" + data[0].id + "' id='addtocart'><span class='glyphicon glyphicon-shopping-cart'></span> Add To Cart</button><button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-heart'></span> Add To Wishlist</button></div></div></div>");
+console.log(items);
 $(".product-viewb").html(items);
 
 });
@@ -383,7 +325,7 @@ html: items.join("")
 $.getJSON("http://127.0.0.1:8000/All/Products/", function (data) {
 var items = [];
 $.each(JSON.parse(data), function (key, val) {
-items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='pic-1' src='" + val.image + "' data-id='" + val.id + "'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>" + val.name + "</a></h3><div class='price'>" + val.prix + "</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
+items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='image' src='" + val.image + "' data-id='" + val.id + "'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>" + val.name + "</a></h3><div class='price'>" + val.prix + "</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
 });
 
 $("#product-view").html(items);
@@ -392,7 +334,7 @@ var idCategorie = $(this).data("id");
 $.getJSON("http://127.0.0.1:8000/index/categorie/" + idCategorie, function (data) {
 var items = [];
 $.each(JSON.parse(data), function (key, val) {
-items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='pic-1' src='" + val.image + "' data-id='" + val.id + "'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>" + val.name + "</a></h3><div class='price'>" + val.prix + "</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
+items.push("<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" + val.id + "'><div class='product-grid'><div class='product-image3'><a href='#'><img class='image' src='" + val.image + "' data-id='" + val.id + "'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>" + val.name + "</a></h3><div class='price'>" + val.prix + "</div><ul class='rating'><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star'></li><li class='fa fa-star disable'></li><li class='fa fa-star disable'></li></ul></div></div></div>");
 });
 
 $("#product-view").html(items);
@@ -405,6 +347,7 @@ $("#product-view").html(items);
 });
 });
 });
-		</script>
+			</script>
+		</body>
 	</body>
-</html>
+</html></body></html></body></html></body></html>
