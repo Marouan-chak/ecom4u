@@ -19,6 +19,7 @@ security:
         username_parameter: _email
         provider: my_provider
         default_target_path: /index
+        always_use_default_target_path: true
       logout:
         path: /logout
         target: /index
