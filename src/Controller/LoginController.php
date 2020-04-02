@@ -14,7 +14,7 @@ class LoginController extends AbstractController
      */
     public function login(Request $request, AuthenticationUtils $utils)
     {
-        $error=$utils->getLastAuthenticationError();
+        $error = $utils->getLastAuthenticationError();
         $lastUsername=$utils->getLastUsername();
         return $this->render('indeex.html.twig', [
             'error' => $error,

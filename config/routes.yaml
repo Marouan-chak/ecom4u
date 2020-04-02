@@ -16,9 +16,7 @@ ProdSearch:
 ProdSearche:
   path: /product/{idProduct}
   controller: App\Controller\IndexController::FindProduct
-useradd:
-  path: /userAdd
-  controller: App\Controller\IndexController::addUser
+
 userConnect:
   path: /user
   controller: App\Controller\IndexController::checkUser
