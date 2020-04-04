@@ -1,19 +1,44 @@
-$(document).ready(function() {
-    $(document).on("click", "#addtocart", function(e) {
-        var items = [];
+$(document).ready(function () {
+    var i = 0;
+    console.log("Hello!");
+    $.get("http://127.0.0.1:8000/index/panier/size", function (data) {
+        $("#nb-prod").html(data);
+    });
+    $(document).on("click", "#remove", function (e) {
         var idProduit = $(this).data("id");
         console.log(idProduit);
-        $.get("http://127.0.0.1:8000/index/panier/add/" + idProduit, function() {});
+        $(this)
+            .closest("tr")
+            .remove();
+
+        $.get(
+            "http://127.0.0.1:8000/index/panier/remove/" + idProduit,
+            function () { }
+        );
+
+        $.get("http://127.0.0.1:8000/total", function (data) {
+            $("#total").html(data + "$");
+        });
+        $.get("http://127.0.0.1:8000/index/panier/size", function (data) {
+            $("#nb-prod").html(data);
+        });
     });
 
-    $(document).on("click", "#carte", function(e) {
-        $.getJSON("http://127.0.0.1:8000/index/panier", function(data) {
+    $(document).on("click", "#addtocart", function (e) {
+        var items = [];
+        var idProduit = $(this).data("id");
+        $.get("http://127.0.0.1:8000/index/panier/add/" + idProduit, function () { });
+        $.get("http://127.0.0.1:8000/index/panier/size", function (data) {
+            $("#nb-prod").html(data);
+        });
+    });
+
+    $(document).on("click", "#carte", function (e) {
+        $.getJSON("http://127.0.0.1:8000/index/panier", function (data) {
             var items = [];
 
-            $.each(JSON.parse(data), function(key, val) {
+            $.each(JSON.parse(data), function (key, val) {
                 // $.each(this, function(key, val) {
-                // console.log(key);
-                console.log(val);
                 items.push(
                     "<tr> <td>" +
                     val.name +
@@ -21,43 +46,27 @@ $(document).ready(function() {
                     val.prix +
                     "$</td><td>" +
                     val.quantity +
-                    "</td><td></td></tr> "
+                    "</td><td><button  data-id='" +
+                    val.product +
+                    "' id='remove'><i   class='fas fa-trash'></i></button></td></tr> "
                 );
             });
             $(".cart-list").html(items);
 
-            $.get("http://127.0.0.1:8000/total", function(data) {
+            $.get("http://127.0.0.1:8000/total", function (data) {
                 $("#total").html(data + "$");
             });
         });
     });
-    $(document).on("click", ".cart", function(e) {
-        var items = [];
-        console.log("sfs");
-        $.getJSON("http://127.0.0.1:8000/index/product/4", function(data) {
-            console.log("zab");
 
-            items.push(
-                "<tr><th scope='row' class='border-0'><div class='p-2'><img src='" +
-                data.pic1 +
-                "' alt='' width='70' class='img-fluid rounded shadow-sm'><div class='ml-3 d-inline-block align-middle'><h5 class='mb-0'> <a href='' class='text-dark d-inline-block align-middle'>" +
-                data.name +
-                "</a></h5></div></div></th><td class='border-0 align-middle'><strong>" +
-                data.prix +
-                "</strong></td><td class='border-0 align-middle'><strong></strong></td><td class='border-0 align-middle rm'><a href='#' class='text-dark '><i class='fa fa-trash'></i></a></td></tr>"
-            );
-
-            $(".cart-list").html(items);
-        });
-    });
-    $(document).on("click", ".image", function(e) {
+    $(document).on("click", ".image", function (e) {
         var idProduit = $(this).data("id");
-        console.log(idProduit);
-        $.getJSON("http://127.0.0.1:8000/index/product/" + idProduit, function(
+
+        $.getJSON("http://127.0.0.1:8000/index/product/" + idProduit, function (
             data
         ) {
             var items = [];
-            console.log("anaa");
+
             items.push(
                 "<div class='row'><div class='col-md-6 product-image3' ><img class='image' src='" +
                 data[0].image +
@@ -69,17 +78,14 @@ $(document).ready(function() {
                 data[0].id +
                 "' id='addtocart'><span class='glyphicon glyphicon-shopping-cart'></span> Add To Cart</button><button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-heart'></span> Add To Wishlist</button></div></div></div>"
             );
-            console.log(items);
+
             $("#product-viewb").html(items);
         });
     });
-    $.getJSON("http://127.0.0.1:8000/All/Categories", function(data) {
+    $.getJSON("http://127.0.0.1:8000/All/Categories", function (data) {
         var items = [];
-        // console.log(data);
-        $.each(JSON.parse(data), function(key, val) {
+        $.each(JSON.parse(data), function (key, val) {
             // $.each(this, function(key, val) {
-            // console.log(key);
-            console.log(val);
             items.push(
                 "<li class='nav-link btn  categorie-btn' data-id='" +
                 val.id +
@@ -94,9 +100,9 @@ $(document).ready(function() {
             class: "my-new-list",
             html: items.join("")
         }).appendTo("#sticky-sidebar");
-        $.getJSON("http://127.0.0.1:8000/All/Products/", function(data) {
+        $.getJSON("http://127.0.0.1:8000/All/Products/", function (data) {
             var items = [];
-            $.each(JSON.parse(data), function(key, val) {
+            $.each(JSON.parse(data), function (key, val) {
                 items.push(
                     "<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" +
                     val.id +
@@ -113,13 +119,13 @@ $(document).ready(function() {
             });
 
             $("#product-view").html(items);
-            $(".categorie-btn").click(function() {
+            $(".categorie-btn").click(function () {
                 var idCategorie = $(this).data("id");
                 $.getJSON(
                     "http://127.0.0.1:8000/index/categorie/" + idCategorie,
-                    function(data) {
+                    function (data) {
                         var items = [];
-                        $.each(JSON.parse(data), function(key, val) {
+                        $.each(JSON.parse(data), function (key, val) {
                             items.push(
                                 "<div class='col-md-3 col-sm-6 ' data-toggle='modal' data-target='#product_view' data-id='" +
                                 val.id +

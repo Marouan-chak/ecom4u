@@ -41,21 +41,41 @@ class CartController extends AbstractController
                 'image' => $produit->getImage(),
 
             );
-
-            //    $total=$total + $produit->getPrix();
-            $total = $total + $produit->getPrix();
         }
-        //  array_push($panierWithData, ['total' =>  $total]);
-
-
-        $panierWithData['total'] = $total;
-        //  $panierWithData['total']= $total ;
-        //dd($panierWithData);
         return new JsonResponse(json_encode($panierWithData));
     }
 
+    /**
+     * @Route ("index/panier/remove/{id}",name="remove")
+     */
+    public function remove($id, SessionInterface $session)
+    {
+
+        $panier = $session->get('panier', []);
 
 
+        if (!empty($panier[$id])) {
+            unset($panier[$id]);
+        }
+        // and remove the item
+
+
+        $session->set('panier', $panier);
+
+        return new JsonResponse(json_encode($session->get('panier')));
+    }
+
+    /**
+     * @Route ("index/panier/size",name="size")
+     */
+    public function size(SessionInterface $session)
+    {
+
+        $panier = $session->get('panier', []);
+
+
+        return new Response(count($panier));
+    }
 
     /**
      * @Route ("/total",name="total")
@@ -75,47 +95,10 @@ class CartController extends AbstractController
         foreach ($panier as $id => $quantity) {
             $produit = $repository->find($id);
 
-            //    $total=$total + $produit->getPrix();
             $total = $total + $produit->getPrix() * $quantity;
         }
-
         return new Response($total);
     }
-
-
-
-
-    /**
-     * @Route ("index/panier/remove/{id}",name="remove")
-     */
-    public function remove($id, SessionInterface $session)
-    {
-
-        $panier = $session->get('panier', []);
-
-
-        if (!empty($panier[$id])) {
-            unset($panier[$id]);
-        }
-        // and remove the item
-
-
-        $session->set('panier', $panier);
-
-        dd($session->get('panier'));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -141,7 +124,6 @@ class CartController extends AbstractController
 
         $session->set('panier', $panier);
 
-        //dd($session->get('panier'));
-
+        return new JsonResponse(json_encode($panier));
     }
 }
