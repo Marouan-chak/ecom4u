@@ -18,9 +18,9 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    // le mail doit etre unique
     /**
-     * @ORM\Column(type="string", length=180)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
@@ -190,14 +190,20 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
-    public function getRoles(){
+    public function getRoles()
+    {
         return [
-            'ROLE_USER'
+            $this->role
         ];
     }
-    public function getSalt(){}
-    public function eraseCredentials(){}
-    public function serialize(){
+    public function getSalt()
+    {
+    }
+    public function eraseCredentials()
+    {
+    }
+    public function serialize()
+    {
         return serialize([
             $this->id,
             $this->email,
@@ -207,7 +213,8 @@ class User implements UserInterface, \Serializable
 
         ]);
     }
-    public function unserialize($string){
+    public function unserialize($string)
+    {
         list(
             $this->id,
             $this->email,
@@ -215,5 +222,9 @@ class User implements UserInterface, \Serializable
             $this->nom,
             $this->password
         ) = unserialize($string, ['allowed_classes' => false]);
+    }
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }
