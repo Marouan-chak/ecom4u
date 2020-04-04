@@ -29,7 +29,7 @@ class Commande
     private $statut;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Produit", mappedBy="commande")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Produit", inversedBy="commandes")
      */
     private $produit;
 
@@ -39,9 +39,15 @@ class Commande
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommandeProduits", mappedBy="commande")
+     */
+    private $commandeProduits;
+
     public function __construct()
     {
         $this->produit = new ArrayCollection();
+        $this->commandeProduits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,7 +91,6 @@ class Commande
     {
         if (!$this->produit->contains($produit)) {
             $this->produit[] = $produit;
-            $produit->setCommande($this);
         }
 
         return $this;
@@ -95,10 +100,6 @@ class Commande
     {
         if ($this->produit->contains($produit)) {
             $this->produit->removeElement($produit);
-            // set the owning side to null (unless already changed)
-            if ($produit->getCommande() === $this) {
-                $produit->setCommande(null);
-            }
         }
 
         return $this;
@@ -114,5 +115,40 @@ class Commande
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|CommandeProduits[]
+     */
+    public function getCommandeProduits(): Collection
+    {
+        return $this->commandeProduits;
+    }
+
+    public function addCommandeProduit(CommandeProduits $commandeProduit): self
+    {
+        if (!$this->commandeProduits->contains($commandeProduit)) {
+            $this->commandeProduits[] = $commandeProduit;
+            $commandeProduit->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeProduit(CommandeProduits $commandeProduit): self
+    {
+        if ($this->commandeProduits->contains($commandeProduit)) {
+            $this->commandeProduits->removeElement($commandeProduit);
+            // set the owning side to null (unless already changed)
+            if ($commandeProduit->getCommande() === $this) {
+                $commandeProduit->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return strval($this->id);
     }
 }
