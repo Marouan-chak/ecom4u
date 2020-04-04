@@ -31,7 +31,7 @@ Class CartController extends AbstractController
           $total=0;
 
           $panierWithData[]=array(
-            ' product' =>$id,
+            'product' =>$id,
             'quantity'=>$quantity,
             'name' => $produit->getName(),
             'categorie' => $produit->getCategorie(),
@@ -48,8 +48,35 @@ Class CartController extends AbstractController
 
   }
 
+/**
+* @Route ("index/panier/remove/{id}",name="remove")
+*/
+public function remove( $id , SessionInterface $session) {
+
+  $panier= $session -> get('panier',[]);
 
 
+  if(!empty($panier[$id])){
+        unset($panier[$id]);
+  }
+  // and remove the item
+
+
+  $session->set('panier',$panier);
+
+  return new JsonResponse(json_encode($session->get('panier')));
+}
+
+/**
+* @Route ("index/panier/size",name="size")
+*/
+public function size(SessionInterface $session) {
+
+  $panier= $session -> get('panier',[]);
+
+
+  return new Response(count($panier));
+}
 
   /**
   * @Route ("/total",name="total")
