@@ -38,7 +38,7 @@ class ProductController extends AbstractController
         $category6->setName('Multimédia');
         $category6->setDescription('Multimédia');
         $product0 = new Produit();
-        $product0->setName('Rii RK907 Clavier Filaire Compact Ultra-Mince USB Version Française(AZERTY) pour Mac et PC, Windows 10/8 / 7 / Vista/XP (Noir)');
+        $product0->setName('Rii RK907 Clavier');
         $product0->setPrix(14.99);
         $product0->setDescription('- Clavier filaire compact ultra-mince taille complète (104 touches) avec pavé numérique\n- Connexion USB filaire simple, vous profiterez d’une expérience de frappe confortable et silencieuse');
         $product0->setImage('https://images-na.ssl-images-amazon.com/images/I/71LvOecD%2BeL._AC_SL1500_.jpg');

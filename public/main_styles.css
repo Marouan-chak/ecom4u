@@ -8,11 +8,117 @@ h3.h3 {
 
 /********************* Shopping Demo-3 **********************/
 
+#sidebar.active {
+    margin-left: -200px;
+}
+
+#product-view.active {
+    margin-left: -200px;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -200px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+    font-family: "Poppins", sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #868282;
+}
+
+.my-new-list {
+    padding: 0 0 0 0;
+}
+
+#sidebar ul.components {
+    padding: 0 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #7386d5;
+    background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.marge {
+    margin-left: 200px;
+}
+
+#sidebar {
+    min-width: 200px;
+    max-width: 200px;
+    height: 100vh;
+    width: 200px;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    height: 100vh;
+    z-index: 999;
+    background: #868282;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.content {
+    position: relative;
+    margin-left: 150px;
+    transition: left 0.4s;
+}
+
 .product-grid {
     font-family: Roboto, sans-serif;
     text-align: center;
     position: relative;
-    z-index: 1
+    z-index: 1;
 }
 
 .product-grid:before {
@@ -20,40 +126,40 @@ h3.h3 {
     height: 81%;
     width: 100%;
     background: #fff;
-    border: 1px solid rgba(0, 0, 0, .1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
-    transition: all .5s ease 0s
+    transition: all 0.5s ease 0s;
 }
 
 .product-grid:hover:before {
     opacity: 1;
-    height: 100%
+    height: 100%;
 }
 
 .product-grid .product-image3 {
-    position: relative
+    position: relative;
 }
 
 .product-grid .product-image3 a {
-    display: block
+    display: block;
 }
 
 .product-grid .product-image3 img {
     width: 100%;
-    height: auto
+    height: auto;
 }
 
 .product-grid .pic-1 {
     opacity: 1;
-    transition: all .5s ease-out 0s
+    transition: all 0.5s ease-out 0s;
 }
 
 .product-grid:hover .pic-1 {
-    opacity: 0
+    opacity: 0;
 }
 
 .product-grid .pic-2 {
@@ -61,11 +167,11 @@ h3.h3 {
     top: 0;
     left: 0;
     opacity: 0;
-    transition: all .5s ease-out 0s
+    transition: all 0.5s ease-out 0s;
 }
 
 .product-grid:hover .pic-2 {
-    opacity: 1
+    opacity: 1;
 }
 
 .product-grid .social {
@@ -79,22 +185,22 @@ h3.h3 {
     left: 0;
     bottom: -23px;
     transform: scale(0);
-    transition: all .3s ease 0s
+    transition: all 0.3s ease 0s;
 }
 
 .product-grid:hover .social {
     opacity: 1;
-    transform: scale(1)
+    transform: scale(1);
 }
 
 .product-grid:hover .product-discount-label,
 .product-grid:hover .product-new-label,
 .product-grid:hover .title {
-    opacity: 0
+    opacity: 0;
 }
 
 .product-grid .social li {
-    display: inline-block
+    display: inline-block;
 }
 
 .product-grid .social li a {
@@ -104,16 +210,16 @@ h3.h3 {
     line-height: 50px;
     width: 50px;
     height: 50px;
-    border: 1px solid rgba(0, 0, 0, .1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     margin: 0 2px;
     display: block;
-    transition: all .3s ease 0s
+    transition: all 0.3s ease 0s;
 }
 
 .product-grid .social li a:hover {
     background: #e67e22;
-    color: #fff
+    color: #fff;
 }
 
 .product-grid .product-discount-label,
@@ -125,24 +231,24 @@ h3.h3 {
     position: absolute;
     right: 10px;
     top: 10px;
-    transition: all .3s
+    transition: all 0.3s;
 }
 
 .product-grid .product-content {
     z-index: -1;
     padding: 15px;
-    text-align: left
+    text-align: left;
 }
 
 .product-grid .title {
     font-size: 14px;
     text-transform: capitalize;
     margin: 0 0 7px;
-    transition: all .3s ease 0s
+    transition: all 0.3s ease 0s;
 }
 
 .product-grid .title a {
-    color: #414141
+    color: #414141;
 }
 
 .product-grid .price {
@@ -151,7 +257,7 @@ h3.h3 {
     letter-spacing: 1px;
     font-weight: 600;
     margin-right: 2px;
-    display: inline-block
+    display: inline-block;
 }
 
 .product-grid .price span {
@@ -162,7 +268,7 @@ h3.h3 {
     text-decoration: line-through;
     text-align: left;
     display: inline-block;
-    margin-top: -2px
+    margin-top: -2px;
 }
 
 .product-grid .rating {
@@ -170,17 +276,17 @@ h3.h3 {
     margin: -22px 0 0;
     list-style: none;
     text-align: right;
-    display: block
+    display: block;
 }
 
 .product-grid .rating li {
     color: #ffd200;
     font-size: 13px;
-    display: inline-block
+    display: inline-block;
 }
 
 .product-grid .rating li.disable {
-    color: #dcdcdc
+    color: #dcdcdc;
 }
 
 .product_view .modal-dialog {
@@ -197,23 +303,23 @@ h3.h3 {
     padding: 10px 0;
 }
 
-@media only screen and (max-width:1200px) {
+@media only screen and (max-width: 1200px) {
     .product-grid .rating {
-        margin: 0
+        margin: 0;
     }
 }
 
-@media only screen and (max-width:990px) {
+@media only screen and (max-width: 990px) {
     .product-grid {
-        margin-bottom: 30px
+        margin-bottom: 30px;
     }
     .product-grid .rating {
-        margin: -22px 0 0
+        margin: -22px 0 0;
     }
 }
 
-@media only screen and (max-width:359px) {
+@media only screen and (max-width: 359px) {
     .product-grid .rating {
-        margin: 0
+        margin: 0;
     }
 }
