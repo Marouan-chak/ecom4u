@@ -6,21 +6,42 @@ $(document).ready(function() {
     });
     $(document).on("click", "#remove", function(e) {
         var idProduit = $(this).data("id");
-        console.log(idProduit);
-        $(this)
-            .closest("tr")
-            .remove();
 
-        $.get(
-            "http://127.0.0.1:8000/index/panier/remove/" + idProduit,
-            function() {}
-        );
+        $.get("http://127.0.0.1:8000/index/panier/remove/" + idProduit, function(
+            data
+        ) {
+            console.log("row will be deleted ? : " + data);
+            if (data) {
+                $(this)
+                    .closest("tr")
+                    .remove();
+            }
+            $.get("http://127.0.0.1:8000/index/panier/size", function(data) {
+                $("#nb-prod").html(data);
+            });
+            $.getJSON("http://127.0.0.1:8000/index/panier", function(data) {
+                var items = [];
 
-        $.get("http://127.0.0.1:8000/total", function(data) {
-            $("#total").html(data + "$");
-        });
-        $.get("http://127.0.0.1:8000/index/panier/size", function(data) {
-            $("#nb-prod").html(data);
+                $.each(JSON.parse(data), function(key, val) {
+                    // $.each(this, function(key, val) {
+                    items.push(
+                        "<tr> <td>" +
+                        val.name +
+                        "</td><td>" +
+                        val.prix +
+                        "$</td><td id='quantity'>" +
+                        val.quantity +
+                        "</td><td><button  data-id='" +
+                        val.product +
+                        "' id='remove'><i   class='fas fa-trash'></i></button></td></tr> "
+                    );
+                });
+                $(".cart-list").html(items);
+
+                $.get("http://127.0.0.1:8000/total", function(data) {
+                    $("#total").html(data + "$");
+                });
+            });
         });
     });
 
@@ -44,7 +65,7 @@ $(document).ready(function() {
                     val.name +
                     "</td><td>" +
                     val.prix +
-                    "$</td><td>" +
+                    "$</td><td id='quantity'>" +
                     val.quantity +
                     "</td><td><button  data-id='" +
                     val.product +
@@ -74,9 +95,9 @@ $(document).ready(function() {
                 data[0].description +
                 "</p><h3 class='price'><span class='glyphicon glyphicon-usd'></span>" +
                 data[0].prix +
-                "</h3><div class='row'><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=' selected='>Color</option><option value='black'>Black</option><option value='white'>White</option><option value='gold'>Gold</option><option value='rose gold'>Rose Gold</option></select></div><!-- end col --><div class='col-md-4 col-sm-6 col-xs-12'><select class='form-control' name='select'><option value=''>Capacity</option><option value=''>16GB</option><option value=''>32GB</option><option value=''>64GB</option><option value=''>128GB</option></select></div><!-- end col --><div class='col-md-4 col-sm-12'><select class='form-control' name='select'><option value='' selected='''>QTY</option><option value=''>1</option><option value=''>2</option><option value=''>3</option></select></div><!-- end col --></div><div class='space-ten'></div><div class='btn-ground'><button type='button' class='btn btn-primary' data-id='" +
+                "$</h3><div class='btn-ground'><button type='button' class='btn btn-primary' data-id='" +
                 data[0].id +
-                "' id='addtocart'><span class='glyphicon glyphicon-shopping-cart'></span> Add To Cart</button><button type='button' class='btn btn-primary'><span class='glyphicon glyphicon-heart'></span> Add To Wishlist</button></div></div></div>"
+                "' id='addtocart'><span class='glyphicon glyphicon-shopping-cart'></span> Add To Cart</button></div></div></div>"
             );
 
             $("#product-viewb").html(items);

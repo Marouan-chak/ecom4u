@@ -54,9 +54,14 @@ Class CartController extends AbstractController
 public function remove( $id , SessionInterface $session) {
 
   $panier= $session -> get('panier',[]);
-
+  $deleteRow=1;
 
   if(!empty($panier[$id])){
+    if ($panier[$id]>1) {
+      $panier[$id]--;
+      $deleteRow=0;
+    }
+    else
         unset($panier[$id]);
   }
   // and remove the item
@@ -64,7 +69,7 @@ public function remove( $id , SessionInterface $session) {
 
   $session->set('panier',$panier);
 
-  return new JsonResponse(json_encode($session->get('panier')));
+  return new Response($deleteRow);
 }
 
 /**
@@ -73,9 +78,12 @@ public function remove( $id , SessionInterface $session) {
 public function size(SessionInterface $session) {
 
   $panier= $session -> get('panier',[]);
+  $size=0;
+  foreach ($panier as $id => $quantity) {
+    $size=$size + $quantity;
+  }
 
-
-  return new Response(count($panier));
+  return new Response($size);
 }
 
   /**

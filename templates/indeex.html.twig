@@ -91,13 +91,14 @@
 							</form>
 
 							<ul class="navbar-nav">
-								<li class="nav-item alighn-center">
-									<button class="btn btn-link pt-4" data-toggle="modal" data-target="#exampleModalLong" id="carte">
-										<i class="fa fa-shopping-cart cart"></i>
-										<span class="badge badge-danger" id="nb-prod"></span>
-									</button>
-								</li>
+
 								{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+									<li class="nav-item alighn-center">
+										<button class="btn btn-link pt-4" data-toggle="modal" data-target="#exampleModalLong" id="carte">
+											<i class="fa fa-shopping-cart cart"></i>
+											<span class="badge badge-danger" id="nb-prod"></span>
+										</button>
+									</li>
 									<li class="nav-item ">
 										<a href="{{ logout_path() }}" class="btn btn-danger btn-rounded my-3" id="logoutButt">
 											<i class="fa fa-user mr-1"></i>Logout</a>
