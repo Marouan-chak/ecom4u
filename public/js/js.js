@@ -44,7 +44,14 @@ $(document).ready(function() {
             });
         });
     });
-
+    $(document).on("click", "#quickAddToCart", function(e) {
+        var items = [];
+        var idProduit = $(this).data("id");
+        $.get("http://127.0.0.1:8000/index/panier/add/" + idProduit, function() {});
+        $.get("http://127.0.0.1:8000/index/panier/size", function(data) {
+            $("#nb-prod").html(data);
+        });
+    });
     $(document).on("click", "#addtocart", function(e) {
         var items = [];
         var idProduit = $(this).data("id");
@@ -131,7 +138,9 @@ $(document).ready(function() {
                     val.image +
                     "' data-id='" +
                     val.id +
-                    "'></a><ul class='social'><li></li><li><a href='#'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>" +
+                    "'></a><ul class='social'><li></li><li><a type='button' href='index' class='btn btn-primary' data-id='" +
+                    val.id +
+                    "' id='quickAddToCart'><i class='fa fa-shopping-cart'></i></a></li></ul><span class='product-new-label'>New</span></div><div class='product-content'><h3 class='title'><a href='#'>" +
                     val.name +
                     "</a></h3><div class='price'>" +
                     val.prix +
