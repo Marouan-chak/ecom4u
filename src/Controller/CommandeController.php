@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Commande;
+use App\Entity\CommandeProduits;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,8 +22,9 @@ class CommandeController extends AbstractController
     {
 
         $useer = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $user->getUsername()]);
-
+        $comprodR = $this->getDoctrine()->getRepository(CommandeProduits::class);
         $response = array();
+
         $commandes = $useer->getCommandes();
         foreach ($commandes as $key => $commande) {
             $produitArray = array();
@@ -31,15 +33,15 @@ class CommandeController extends AbstractController
                 'id' => $commande->getId(),
                 'statut' => $commande->getStatut(),
                 'date' => $commande->getDate()->format("Y-m-d"),
-
+                'address' => $commande->getAdresse(),
 
 
             );
-            $response[$key]['produits'] = 'produit';
 
 
             foreach ($produits as $produit) {
-                $produitArray[] = $produit->getName();
+                $comprod = $comprodR->findOneBy(['produits' => $produit, 'commande' => $commande]);
+                $produitArray[] = $produit->getName() . '(' . $comprod->getQuantity() . ')';
             }
             $response[$key]['produits'] = $produitArray;
         }

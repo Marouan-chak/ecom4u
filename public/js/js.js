@@ -12,7 +12,7 @@ $(document).ready(function () {
             $.each(JSON.parse(data), function (key, val) {
                 val.produits.forEach(element => {
                     string = string.concat(element)
-                    string = string.concat(" ")
+                    string = string.concat("<br> ")
 
                 });
 
@@ -25,7 +25,10 @@ $(document).ready(function () {
                     string +
                     "</td><td>" +
                     val.date +
-                    "</td></tr> "
+                    "</td><td> " +
+                    val.address +
+                    "</td></tr>"
+
                 );
 
                 string = '';
@@ -34,12 +37,29 @@ $(document).ready(function () {
 
         });
     });
-    $(document).on("click", "#valid-cart", function (e) {
-        $.get("http://127.0.0.1:8000/index/panier/valid", function (data) {
-            console.log(data);
-        }
-        );
+    $("form.cart").on("submit", function () {
+        //  $.get("http://127.0.0.1:8000/index/panier/valid", function (data) {
+        var that = $(this),
+            url = "http://127.0.0.1:8000/index/panier/valid"
+        type = that.attr('method'),
+            data = {};
+        data["address"] = that.find('[name]').val();
+        $.ajax({
+            url: url,
+            type: type,
+            data: data,
+            success: function (response) {
+                console.log(response);
+
+            }
+
+        })
+
+
     });
+
+
+
     $(document).on("click", "#remove", function (e) {
         var idProduit = $(this).data("id");
         console.log(idProduit);
