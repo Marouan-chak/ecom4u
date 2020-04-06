@@ -35,9 +35,9 @@ $(document).ready(function () {
         });
     });
     $(document).on("click", "#valid-cart", function (e) {
-        $.get(
-            "http://127.0.0.1:8000/index/panier/valid",
-            function () { }
+        $.get("http://127.0.0.1:8000/index/panier/valid", function (data) {
+            console.log(data);
+        }
         );
     });
     $(document).on("click", "#remove", function (e) {
@@ -63,7 +63,7 @@ $(document).ready(function () {
     $(document).on("click", "#addtocart", function (e) {
         var items = [];
         var idProduit = $(this).data("id");
-        $.get("http://127.0.0.1:8000/index/panier/add/" + idProduit, function () { });
+        $.get("http://127.0.0.1:8000/index/panier/add/" + idProduit, function (data) { });
         $.get("http://127.0.0.1:8000/index/panier/size", function (data) {
             $("#nb-prod").html(data);
         });

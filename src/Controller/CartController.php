@@ -137,19 +137,19 @@ class CartController extends AbstractController
      * @Route ("index/panier/valid",name="valid_cart")
      */
 
-    public function valid(SessionInterface $session, UserInterface $user)
+    public function valid(Request $request, SessionInterface $session, UserInterface $user)
     {
         $manager = $this->getDoctrine()->getManager();
-
         $panier = $session->get('panier', []);
         $commande = new Commande();
-
+        $addresse = $request->request->get('addresse');
         $repositoryP = $this->getDoctrine()->getRepository(Produit::class);
         $repositoryU = $this->getDoctrine()->getRepository(User::class);
         $user1 = $repositoryU->findOneBy(['email' => $user->getUsername()]);
         $commande->setDate(new \DateTime());
         $commande->setStatut('WAIT-VALIDATION');
         $commande->setUser($user1);
+        $commande->setAdresse($addresse);
 
         foreach ($panier as $id => $quantity) {
             $produit = $repositoryP->find($id);
@@ -167,7 +167,7 @@ class CartController extends AbstractController
         echo ($commande->getId());
         $manager->flush();
 
-        return new JsonResponse(json_encode([$commande->getId() => $commande->getId()]));
+        return new JsonResponse(json_encode([$commande->getId() => $commande->getAdresse()]));
 
         /*
         $response = new Response("commande prise en compte");
