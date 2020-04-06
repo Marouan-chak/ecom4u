@@ -12,7 +12,8 @@
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="main_styles.css">
 
-		<title>Ecom4u</title>
+
+		<title>ShoppingTime</title>
 	</head>
 
 	<body>
@@ -64,10 +65,54 @@
 											<h5 class="font-weight-bold" id="total"></h5>
 										</li>
 									</ul>
-									<a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+									<a href="#" class="btn btn-dark rounded-pill py-2 btn-block" id="valid-cart">Procceed to checkout</a>
+
+
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--commande Modal -->
+		<div class="modal fade" id="commandeModel" tabindex="-1" role="dialog" aria-labelledby="commandeModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Historique de commandes</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col" class="border-0 bg-light">
+											<div class="p-2 px-3 text-uppercase">ID</div>
+										</th>
+										<th scope="col" class="border-0 bg-light">
+											<div class="py-2 text-uppercase">Statut</div>
+										</th>
+										<th scope="col" class="border-0 bg-light">
+											<div class="py-2 text-uppercase">Produit</div>
+										</th>
+										<th scope="col" class="border-0 bg-light">
+											<div class="py-2 text-uppercase">Date</div>
+										</th>
+									</tr>
+								</thead>
+								<tbody class="commande-list"></tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
@@ -92,10 +137,20 @@
 
 							<ul class="navbar-nav">
 								<li class="nav-item alighn-center">
+
+									<button class="btn btn-link pt-4" data-toggle="modal" data-target="#commandeModel" id="history">
+										<i class="fa fa-history" aria-hidden="false"></i>
+
+
+									</button>
+
+
 									<button class="btn btn-link pt-4" data-toggle="modal" data-target="#exampleModalLong" id="carte">
 										<i class="fa fa-shopping-cart cart"></i>
 										<span class="badge badge-danger" id="nb-prod"></span>
 									</button>
+
+
 								</li>
 								{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 									<li class="nav-item ">
@@ -108,154 +163,146 @@
 											<i class="fa fa-user mr-1"></i>Log In / Register</button>
 									</li>
 								{% endif %}
-
-							</ul>
-						</div>
+							</li>
+						</ul>
 					</div>
-				</nav>
-			</header>
-			<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				</div>
+			</nav>
+		</header>
+		<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div
+				class="modal-dialog cascading-modal" role="document">
+				<!--Content-->
 				<div
-					class="modal-dialog cascading-modal" role="document">
-					<!--Content-->
+					class="modal-content">
+
+					<!--Modal cascading tabs-->
 					<div
-						class="modal-content">
+						class="modal-c-tabs">
 
-						<!--Modal cascading tabs-->
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
+									<i class="fa fa-user mr-1"></i>
+									Login</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#panel8" role="tab">
+									<i class="fa fa-user-plus mr-1"></i>
+									Register</a>
+							</li>
+						</ul>
+
+						<!-- Tab panels -->
 						<div
-							class="modal-c-tabs">
-
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
-										<i class="fa fa-user mr-1"></i>
-										Login</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" data-toggle="tab" href="#panel8" role="tab">
-										<i class="fa fa-user-plus mr-1"></i>
-										Register</a>
-								</li>
-							</ul>
-
-							<!-- Tab panels -->
+							class="tab-content">
+							<!--Panel 7-->
 							<div
-								class="tab-content">
-								<!--Panel 7-->
-								<div
-									class="tab-pane fade in show active" id="panel7" role="tabpanel">
+								class="tab-pane fade in show active" id="panel7" role="tabpanel">
 
-									<!--Body-->
-									<div class="modal-body mb-1">
+								<!--Body-->
+								<div class="modal-body mb-1">
 
-										<form action="{{ path('login') }}" method="POST" id="frmLogin">
+									<form action="{{ path('login') }}" method="POST" id="frmLogin">
 
-											<div class="md-form form-sm mb-5">
-												<i class="fa fa-envelope prefix"></i>
-												<input type="email" name="_email" id="email_info" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="email_info">Your email</label>
-											</div>
-
-											<div class="md-form form-sm mb-4">
-												<i class="fa fa-lock prefix"></i>
-												<input type="password" name="_password" id="password_info" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="password_info">Your password</label>
-											</div>
-											<div class="text-center mt-2">
-												<input type="submit" name="login" value="Login" class="btnLogin btn btn-info">
-											</div>
-										</form>
-									</div>
-									<!--Footer-->
-									<div class="modal-footer">
-										<div class="options text-center text-md-right mt-1">
-											<p>Not a member?
-												<a href="#" class="blue-text">Sign Up</a>
-											</p>
-											<p>Forgot
-												<a href="#" class="blue-text">Password?</a>
-											</p>
+										<div class="md-form form-sm mb-5">
+											<i class="fa fa-envelope prefix"></i>
+											<input type="email" name="_email" id="email_info" class="form-control form-control-sm validate">
+											<label data-error="wrong" data-success="right" for="email_info">Your email</label>
 										</div>
-										<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
-									</div>
 
+										<div class="md-form form-sm mb-4">
+											<i class="fa fa-lock prefix"></i>
+											<input type="password" name="_password" id="password_info" class="form-control form-control-sm validate">
+											<label data-error="wrong" data-success="right" for="password_info">Your password</label>
+										</div>
+										<div class="text-center mt-2">
+											<input type="submit" name="login" value="Login" class="btnLogin btn btn-info">
+										</div>
+									</form>
 								</div>
-								<!--/.Panel 7-->
-
-								<!--Panel 8-->
-								{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
-
-									<div
-										class="tab-pane fade" id="panel8" role="tabpanel">
-										<!--Body-->
-										<div class="modal-body">
-
-											{% form_theme form 'bootstrap_4_layout.html.twig' %}
-
-											{% block body %}
-												<h2>User Sign Up:</h2>
-												{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
-												{{ form(form) }}
-													{{ form_end(form) }}
-												{% endblock %}
-											</div>
-											<!--Footer-->
-											<div class="modal-footer">
-												<div class="options text-right">
-													<p class="pt-1">Already have an account?
-														<a href="#" class="blue-text">Log In</a>
-													</p>
-												</div>
-												<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
-											</div>
-										</div>
-										<!--/.Panel 8-->
+								<!--Footer-->
+								<div class="modal-footer">
+									<div class="options text-center text-md-right mt-1">
+										<p>Not a member?
+											<a href="#" class="blue-text">Sign Up</a>
+										</p>
+										<p>Forgot
+											<a href="#" class="blue-text">Password?</a>
+										</p>
 									</div>
-								{% endif %}
+									<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+								</div>
+
 							</div>
+							<!--/.Panel 7-->
+
+							<!--Panel 8-->
+							{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+
+								<div
+									class="tab-pane fade" id="panel8" role="tabpanel">
+									<!--Body-->
+									<div class="modal-body">
+
+										{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+										{% block body %}
+											<h2>User Sign Up:</h2>
+											{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
+											{{ form(form) }}
+												{{ form_end(form) }}
+											{% endblock %}
+										</div>
+										<!--Footer-->
+										<div class="modal-footer">
+											<div class="options text-right">
+												<p class="pt-1">Already have an account?
+													<a href="#" class="blue-text">Log In</a>
+												</p>
+											</div>
+											<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+									<!--/.Panel 8-->
+								</div>
+							{% endif %}
 						</div>
-						<!--/.Content-->
 					</div>
-				</div>
-				<!--Modal: Login / Register Form-->
-
-			</div>
-			<div class="row" style="margin-top: 55px">
-
-				<div class="col-2 px-1 bg-light position-fixed" style="height:600px;margin-top:30px">
-					<ul class="nav flex-column nav-stacked" id="sticky-sidebar"></ul>
-				</div>
-				<div class="col-8 offset-2">
-					<div class="container">
-						<h3 class="h3">Sélection du jour
-						</h3>
-						<div class="row" id="product-view"></div>
-					</div>
-					<hr>
-				</div>
-
-			</div>
-
-			<div class="modal fade product_view" id="product_view">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<a href="#" data-dismiss="modal" class="class pull-right">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>
-
-						</div>
-
-						<div class="modal-body " id="product-viewb"></div>
-					</div>
+					<!--/.Content-->
 				</div>
 			</div>
 			<!--Modal: Login / Register Form-->
-
-			<footer id="footer"></footer>
 		</div>
-	</body>
-	<script type="text/javascript" src="js/js.js"></script>
+		<div class="row" style="margin-top: 55px">
 
+			<div class="col-2 px-1 bg-light position-fixed" style="height:600px;margin-top:30px">
+				<ul class="nav flex-column nav-stacked" id="sticky-sidebar"></ul>
+			</div>
+			<div class="col-8 offset-2">
+				<div class="container">
+					<h3 class="h3">Sélection du jour
+					</h3>
+					<div class="row" id="product-view"></div>
+				</div>
+				<hr>
+			</div>
+		</div>
+		<div class="modal fade product_view" id="product_view">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<a href="#" data-dismiss="modal" class="class pull-right">
+							<span class="glyphicon glyphicon-remove"></span>
+						</a>
+
+					</div>
+
+					<div class="modal-body " id="product-viewb"></div>
+				</div>
+			</div>
+		</div><!--Modal: Login / Register Form--><footer id="footer"></footer>
+	</body>
 </html>
+<script type="text/javascript" src="js/js.js"></script></html>

@@ -1,8 +1,44 @@
 $(document).ready(function () {
     var i = 0;
-    console.log("Hello!");
+    console.log("Hello!  8");
     $.get("http://127.0.0.1:8000/index/panier/size", function (data) {
         $("#nb-prod").html(data);
+    });
+    $(document).on("click", "#history", function (e) {
+        $.get("http://127.0.0.1:8000/commande", function (data) {
+            var items = [];
+            console.log(data);
+            var string = '-';
+            $.each(JSON.parse(data), function (key, val) {
+                val.produits.forEach(element => {
+                    string = string.concat(element)
+                    string = string.concat(" ")
+
+                });
+
+                items.push(
+                    "<tr> <td>" +
+                    val.id +
+                    "</td><td>" +
+                    val.statut +
+                    "$</td><td>" +
+                    string +
+                    "</td><td>" +
+                    val.date +
+                    "</td></tr> "
+                );
+
+                string = '';
+            });
+            $(".commande-list").html(items);
+
+        });
+    });
+    $(document).on("click", "#valid-cart", function (e) {
+        $.get(
+            "http://127.0.0.1:8000/index/panier/valid",
+            function () { }
+        );
     });
     $(document).on("click", "#remove", function (e) {
         var idProduit = $(this).data("id");

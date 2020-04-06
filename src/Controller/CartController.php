@@ -2,14 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Produit;
+use App\Entity\Commande;
 use App\Entity\Categories;
-use Symfony\Component\HttpFoundation\Response;
+use App\Entity\CommandeProduits;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class CartController extends AbstractController
@@ -125,5 +132,46 @@ class CartController extends AbstractController
         $session->set('panier', $panier);
 
         return new JsonResponse(json_encode($panier));
+    }
+    /**
+     * @Route ("index/panier/valid",name="valid_cart")
+     */
+
+    public function valid(SessionInterface $session, UserInterface $user)
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $panier = $session->get('panier', []);
+        $commande = new Commande();
+
+        $repositoryP = $this->getDoctrine()->getRepository(Produit::class);
+        $repositoryU = $this->getDoctrine()->getRepository(User::class);
+        $user1 = $repositoryU->findOneBy(['email' => $user->getUsername()]);
+        $commande->setDate(new \DateTime());
+        $commande->setStatut('WAIT-VALIDATION');
+        $commande->setUser($user1);
+
+        foreach ($panier as $id => $quantity) {
+            $produit = $repositoryP->find($id);
+            $commande->addProduit($produit);
+
+
+            $comProd = new CommandeProduits();
+            $comProd->setProduits($produit);
+            $comProd->setCommande($commande);
+            $comProd->setQuantity($quantity);
+            $manager->persist($comProd);
+        }
+
+        $manager->persist($commande);
+        echo ($commande->getId());
+        $manager->flush();
+
+        return new JsonResponse(json_encode([$commande->getId() => $commande->getId()]));
+
+        /*
+        $response = new Response("commande prise en compte");
+        $response->send(); 
+         */
     }
 }
