@@ -52,17 +52,21 @@ class CartController extends AbstractController
     {
 
         $panier = $session->get('panier', []);
-
+        $deleteRow = 1;
 
         if (!empty($panier[$id])) {
-            unset($panier[$id]);
+            if ($panier[$id] > 1) {
+                $panier[$id]--;
+                $deleteRow = 0;
+            } else
+                unset($panier[$id]);
         }
         // and remove the item
 
 
         $session->set('panier', $panier);
 
-        return new JsonResponse(json_encode($session->get('panier')));
+        return new Response($deleteRow);
     }
 
     /**
@@ -72,9 +76,12 @@ class CartController extends AbstractController
     {
 
         $panier = $session->get('panier', []);
+        $size = 0;
+        foreach ($panier as $id => $quantity) {
+            $size = $size + $quantity;
+        }
 
-
-        return new Response(count($panier));
+        return new Response($size);
     }
 
     /**
