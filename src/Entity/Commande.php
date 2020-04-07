@@ -44,6 +44,11 @@ class Commande
      */
     private $commandeProduits;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse;
+
     public function __construct()
     {
         $this->produit = new ArrayCollection();
@@ -150,5 +155,17 @@ class Commande
     public function __toString()
     {
         return strval($this->id);
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
     }
 }

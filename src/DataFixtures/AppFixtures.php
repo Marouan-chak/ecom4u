@@ -285,19 +285,22 @@ Arrêtée par la Gestapo en mars 1944 à Avignon avec son père, son petit-frèr
         /* creéation des commmandes */
 
         $commande1 = new Commande();
-        $commande1->setDate(new \DateTime('02-04-2019'));
+        $commande1->setDate(new \DateTime());
         $commande1->setStatut('Shipped');
         $commande1->addProduit($product1);
         $commande1->addProduit($product2);
         $commande1->addProduit($product3);
         $commande1->setUser($user1);
+        $commande1->setAdresse("5 rue manu, paris");
         $commande2 = new commande();
-        $commande2->setDate(new \DateTime('03-04-2019'));
+        $commande2->setDate(new \DateTime());
         $commande2->setStatut('Shipped');
         $commande2->addProduit($product1);
         $commande2->addProduit($product4);
         $commande2->addProduit($product5);
         $commande2->setUser($user1);
+        $commande2->setAdresse("5 rue manu, auber");
+
 
 
         /* attribuant des quantité pour les produits demander */
