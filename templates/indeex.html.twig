@@ -26,9 +26,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div
-						class="modal-body">
-
+					<divclass="modal-body">
 						<!-- Shopping cart table -->
 						<div class="table-responsive">
 							<table class="table">
@@ -65,7 +63,7 @@
 											<h5 class="font-weight-bold" id="total"></h5>
 										</li>
 									</ul>
-									<form action="#" method="post" class="cart">
+									<form action="#" method="post" class="cart-handle">
 										<input type="text" name="address" placeholder="entrez votre adresse SVP ...">
 										<input class="btn btn-success my-2 my-sm-0" type="submit" value="valider la commande" id="valid-cart">
 
@@ -80,16 +78,20 @@
 		</div>
 
 
+		<!-- $$$$$$$$$$$$$$$$$ -->
+
+
+		<!-- $$$$$$$$$$$$$$$$$ -->
+
+
 		<!--commande Modal -->
-		<div class="modal fade bd-example-modal-lg" id="commandeModel" tabindex="-1" role="dialog" aria-labelledby="commandeModalLabel" aria-hidden="true">
-
-			<div class="modal-dialog  modal-lg" role="document">
-
+			<div class="modal fade bd-example-modal-lg" id="commandeModel" tabindex="-1" role="dialog" aria-labelledby="commandeModalLabel" aria-hidden="true"> <div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Historique de commandes</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
+
 						</button>
 					</div>
 					<div class="modal-body">
@@ -112,232 +114,222 @@
 										<th scope="col" class="border-0 bg-light">
 											<div class="py-2 text-uppercase">adresse</div>
 										</th>
-
 									</tr>
 								</thead>
 								<tbody class="commande-list"></tbody>
 							</table>
 						</div>
 					</div>
-
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<header class="header row">
-				<nav class="navbar navbar-expand-md navbar-light bg-light main-menu fixed-top" style="box-shadow:none">
-					<div class="container">
-						<a class="navbar-brand" href="#">
-							<h4 class="font-weight-bold">E-com Paradise</h4>
-						</a>
-						<div class="collapse navbar-collapse">
-							<form
-								class="form-inline my-2 my-lg-0 mx-auto">
-								<!------ Include the above in your HEAD tag ---------->
-
-								<input class="form-control" type="search" placeholder="Search for products..." aria-label="Search">
-								<button class="btn btn-success my-2 my-sm-0" type="submit">
-									<i class="fa fa-search"></i>
-								</button>
-							</form>
-
-							<ul class="navbar-nav">
-								{% if is_granted('IS_AUTHENTICATED_FULLY')%}
-
-									<li class="nav-item alighn-center">
-
-										<button class="btn btn-link pt-4" data-toggle="modal" data-target="#commandeModel" id="history">
-											<i class="fa fa-history" aria-hidden="false"></i>
 
 
-										</button>
+		<header class="header">
+			<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color:#868282;">
+				<div class="container-fluid">
 
 
-										<button class="btn btn-link pt-4" data-toggle="modal" data-target="#exampleModalLong" id="carte">
-											<i class="fa fa-shopping-cart cart"></i>
-											<span class="badge badge-danger" id="nb-prod"></span>
-										</button>
+					<button type="button" id="sidebarCollapse" class="btn btn-info mx-2">
+						<i class="fas fa-align-left"></i>
+						<span></span>
+					</button>
 
 
-									</li>
-									<li class="nav-item ">
-										<a href="{{ logout_path() }}" class="btn btn-danger btn-rounded my-3" id="logoutButt">
-											<i class="fa fa-user mr-1"></i>Logout</a>
-									</li>
-								{% else %}
-									<li class="nav-item ">
-										<button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt">
-											<i class="fa fa-user mr-1"></i>Log In / Register</button>
-									</li>
-								{% endif %}
+					<a class="navbar-brand" href="index">
+						<h4 class="font-weight-bold ">E-com Paradise</h4>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<form
+							class="form-inline my-2 my-lg-0 mx-auto">
+							<!------ Include the above in your HEAD tag ---------->
 
-							</ul>
-						</div>
+							<input class="form-control" type="search" placeholder="Search for products..." aria-label="Search">
+							<button class="btn btn-success my-2 my-sm-0" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
+
+						<ul class="navbar-nav">
+
+							{% if is_granted('IS_AUTHENTICATED_FULLY')%}
+								<li class="nav-item alighn-center">
+									<button class="btn btn-link pt-4" data-toggle="modal" data-target="#commandeModel" id="history">
+										<i class="fa fa-history" aria-hidden="false"></i>
+									</button>
+									<button class="btn btn-link pt-4" data-toggle="modal" data-target="#exampleModalLong" id="carte">
+										<i class="fa fa-shopping-cart cart"></i>
+										<span class="badge badge-danger" id="nb-prod"></span>
+									</button>
+								</li>
+								<li class="nav-item ">
+									<a href="{{ logout_path() }}" class="btn btn-danger btn-rounded my-3" id="logoutButt">
+										<i class="fa fa-user mr-1"></i>Logout</a>
+								</li>
+							{% else %}
+								<li class="nav-item ">
+									<button href="" class="btn btn-primary btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm" id="loginButt">
+										<i class="fa fa-user mr-1"></i>Log In / Register
+									</button>
+								</li>
+							{% endif %}
+
+						</ul>
 					</div>
-				</nav>
-			</header>
-			<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				</div>
+			</nav>
+		</header>
+		<div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div
+				class="modal-dialog cascading-modal" role="document">
+				<!--Content-->
 				<div
-					class="modal-dialog cascading-modal" role="document">
-					<!--Content-->
+					class="modal-content">
+					<!--Modal cascading tabs-->
 					<div
-						class="modal-content">
+						class="modal-c-tabs">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
+									<i class="fa fa-user mr-1"></i>
+									Login</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#panel8" role="tab">
+									<i class="fa fa-user-plus mr-1"></i>
+									Register</a>
+							</li>
+						</ul>
 
-						<!--Modal cascading tabs-->
+						<!-- Tab panels -->
 						<div
-							class="modal-c-tabs">
-
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
-										<i class="fa fa-user mr-1"></i>
-										Login</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" data-toggle="tab" href="#panel8" role="tab">
-										<i class="fa fa-user-plus mr-1"></i>
-										Register</a>
-								</li>
-							</ul>
-
-							<!-- Tab panels -->
+							class="tab-content">
+							<!--Panel 7-->
 							<div
-								class="tab-content">
-								<!--Panel 7-->
-								<div
-									class="tab-pane fade in show active" id="panel7" role="tabpanel">
+								class="tab-pane fade in show active" id="panel7" role="tabpanel">
 
-									<!--Body-->
-									<div class="modal-body mb-1">
+								<!--Body-->
+								<div class="modal-body mb-1">
 
-										<form action="{{ path('login') }}" method="POST" id="frmLogin">
+									<form action="{{ path('login') }}" method="POST" id="frmLogin">
 
-											<div class="md-form form-sm mb-5">
-												<i class="fa fa-envelope prefix"></i>
-												<input type="email" name="_email" id="email_info" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="email_info">Your email</label>
-											</div>
-
-											<div class="md-form form-sm mb-4">
-												<i class="fa fa-lock prefix"></i>
-												<input type="password" name="_password" id="password_info" class="form-control form-control-sm validate">
-												<label data-error="wrong" data-success="right" for="password_info">Your password</label>
-											</div>
-											<div class="text-center mt-2">
-												<input type="submit" name="login" value="Login" class="btnLogin btn btn-info">
-											</div>
-										</form>
-									</div>
-									<!--Footer-->
-									<div class="modal-footer">
-										<div class="options text-center text-md-right mt-1">
-											<p>Not a member?
-												<a href="#" class="blue-text">Sign Up</a>
-											</p>
-											<p>Forgot
-												<a href="#" class="blue-text">Password?</a>
-											</p>
+										<div class="md-form form-sm mb-5">
+											<i class="fa fa-envelope prefix"></i>
+											<input type="email" name="_email" id="email_info" class="form-control form-control-sm validate">
+											<label data-error="wrong" data-success="right" for="email_info">Your email</label>
 										</div>
-										<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
-									</div>
 
+										<div class="md-form form-sm mb-4">
+											<i class="fa fa-lock prefix"></i>
+											<input type="password" name="_password" id="password_info" class="form-control form-control-sm validate">
+											<label data-error="wrong" data-success="right" for="password_info">Your password</label>
+										</div>
+										<div class="text-center mt-2">
+											<input type="submit" name="login" value="Login" class="btnLogin btn btn-info">
+										</div>
+									</form>
 								</div>
-								<!--/.Panel 7-->
+								<!--Footer-->
+								<div class="modal-footer">
+									<div class="options text-center text-md-right mt-1">
+										<p>Not a member?
+											<a href="#" class="blue-text">Sign Up</a>
+										</p>
+										<p>Forgot
+											<a href="#" class="blue-text">Password?</a>
+										</p>
+									</div>
+									<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
+								</div>
 
-								<!--Panel 8-->
-								{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+							</div>
+							<!--/.Panel 7-->
 
-									<div
-										class="tab-pane fade" id="panel8" role="tabpanel">
-										<!--Body-->
-										<div class="modal-body">
+							<!--Panel 8-->
+							{% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
 
-											{% form_theme form 'bootstrap_4_layout.html.twig' %}
+								<div
+									class="tab-pane fade" id="panel8" role="tabpanel">
+									<!--Body-->
+									<div class="modal-body">
 
-											{% block body %}
-												<h2>User Sign Up:</h2>
-												{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
-												{{ form(form) }}
-													{{ form_end(form) }}
-												{% endblock %}
+										{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+										{% block body %}
+											<h2>User Sign Up:</h2>
+											{{ form_start(form,{'attr':{'id':'custom_register_form'}}) }}
+											{{ form(form) }}
+												{{ form_end(form) }}
+											{% endblock %}
+										</div>
+										<!--Footer-->
+										<div class="modal-footer">
+											<div class="options text-right">
+												<p class="pt-1">Already have an account?
+													<a href="#" class="blue-text">Log In</a>
+												</p>
 											</div>
-											<!--Footer-->
-											<div class="modal-footer">
-												<div class="options text-right">
-													<p class="pt-1">Already have an account?
-														<a href="#" class="blue-text">Log In</a>
-													</p>
-												</div>
-												<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
-											</div>
+											<button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
 										</div>
 										<!--/.Panel 8-->
-									</div>
-								{% endif %}
+									{% endif %}
+								</div>
+							</div>
+							<!--/.Content-->
+						</div>
+					</div>
+					<!--Modal: Login / Register Form-->
+
+				</div>
+				<div
+					class="wrapper mt-4 ">
+
+					<!-- Sidebar -->
+					<nav id="sidebar" class="mt-4">
+						<div class="sidebar-header">
+							<h3>Catégories</h3>
+						</div>
+
+						<ul class="list-unstyled components" id="sticky-sidebar"></ul>
+					</nav>
+
+					<!-- Page Content -->
+					<div id="content" style="width:100%;">
+						<div class="container">
+							<div class="row px-2 py-3">
+								<div id="product-view" class="marge"></div>
 							</div>
 						</div>
-						<!--/.Content-->
+
+
+					</div>
+				</div>
+				<div class="modal fade product_view" id="product_view">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<a href="#" data-dismiss="modal" class="class pull-right">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+
+							</div>
+
+							<div class="modal-body " id="product-viewb"></div>
+						</div>
 					</div>
 				</div>
 				<!--Modal: Login / Register Form-->
 
-			</div>
-			<div
-				class="wrapper mt-4 ">
-
-				<!-- Sidebar -->
-				<nav id="sidebar" class="mt-4">
-					<div class="sidebar-header">
-						<h3>Catégories</h3>
-					</div>
-
-					<ul class="list-unstyled components" id="sticky-sidebar"></ul>
-				</nav>
-
-				<!-- Page Content -->
-				<div id="content" style="width:100%;">
-					<div class="container">
-						<div class="row px-2 py-3">
-							<div id="product-view" class="marge"></div>
-						</div>
-					</div>
-
-
-				</div>
-			</div>
-			<div class="modal fade product_view" id="product_view">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<a href="#" data-dismiss="modal" class="class pull-right">
-								<span class="glyphicon glyphicon-remove"></span>
-							</a>
-
-						</div>
-
-
-						<div class="modal fade product_view" id="product_view">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<a href="#" data-dismiss="modal" class="class pull-right">
-											<span class="glyphicon glyphicon-remove"></span>
-										</a>
-
-									</div>
-
-									<div class="modal-body " id="product-viewb"></div>
-								</div>
-							</div>
-						</div>
-						<!--Modal: Login / Register Form-->
-
-						<footer id="footer"></footer>
-					</body>
-				</html>
-				<script type="text/javascript" src="js/js.js"></script>
-			</html>
+				<footer id="footer"></footer>
+			</body>
+		</html>
+		<script type="text/javascript" src="js/js.js"></script>
+	</body>
+</html>

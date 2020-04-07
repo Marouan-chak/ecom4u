@@ -40,7 +40,7 @@ $(document).ready(function () {
 
         });
     });
-    $("form.cart").on("submit", function () {
+    $("form.cart-handle").on("submit", function () {
         //  $.get("http://127.0.0.1:8000/index/panier/valid", function (data) {
         var that = $(this),
             url = "http://127.0.0.1:8000/index/panier/valid"
